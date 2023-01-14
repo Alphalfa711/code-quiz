@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "chrome",
+            "name": "file:///C:/Users/nyziu/Desktop/Rutgets-materials/Challenges/module4-challenge%20code-quiz/code-quiz/index.html",
+            "request": "launch",
+            "url": "file:///C:/Users/nyziu/Desktop/Rutgets-materials/Challenges/module4-challenge%20code-quiz/code-quiz/index.html"
+        }
+    ]
+}
