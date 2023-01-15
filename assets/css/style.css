@@ -126,7 +126,7 @@ ul {
     color: white;                
 }
 
-.disabled {
+.disabled {    
     pointer-events: none;    
 }
 

@@ -6,18 +6,21 @@ const questionsArray = [
         optionB: "b. other arrays",
         optionC: "c. booleans",
         optionD: "d. all of the above",
-        answer: "d"
+        answer: "d"        
     },
     {
         question: "Loos in JS:",
-        optionA: "Option5",
-        optionB: "Option6",
-        optionC: "Option7",
-        optionD: "Option8",
+        optionA: "a. Option5",
+        optionB: "b. Option6",
+        optionC: "c. Option7",
+        optionD: "d. Option8",
         answer: "a"
     } 
 ]
 
+// Defining Global variables
+var currentQuestionIndex;
+var remainingTime;
 
 // Creating DOM Elements
 
@@ -49,13 +52,13 @@ quizListContainer.setAttribute("id", "list-container");
 var quizUl = document.createElement('ul');
 // Answers as list items
 var quizli1 = document.createElement('li')
-quizli1.setAttribute("class", "question")
+// quizli1.setAttribute("class", "question")
 var quizli2 = document.createElement('li');
-quizli2.setAttribute("class", "question")
+// quizli2.setAttribute("class", "question")
 var quizli3 = document.createElement('li');
-quizli3.setAttribute("class", "question")
+// quizli3.setAttribute("class", "question")
 var quizli4 = document.createElement('li');
-quizli4.setAttribute("class", "question")
+// quizli4.setAttribute("class", "question")
 // Display correct / wrong answer
 var quizAnswerContainer = document.createElement('div')
     // Set it's initial state to hidden
@@ -67,19 +70,15 @@ timerAnswer.setAttribute("class", "timer");
 
 
 
-// quizQuestion.setAttribute("class", "answer")
 
-var currentQuestionIndex;
-var remainingTime;
 
 function startQuiz() {
-    // Reset global values
-    currentQuestionIndex = 0;
-    remainingTime = 90;
+    resetVariables();
     showWelcomeScreen();
 }
 
-function resetQuiz() {
+function resetVariables() {
+    remainingTime = 90;
     currentQuestionIndex = 0;
 }
 
@@ -90,45 +89,85 @@ function showWelcomeScreen() {
     quizContainer.appendChild(startQuizButton);    
 }
 
-function removeWelcomeScreen() {
-    quizContainer.removeChild(startHeader);
-    quizContainer.removeChild(startMessage1);
-    quizContainer.removeChild(startMessage2);
-    quizContainer.removeChild(startQuizButton);    
-    currentQuestion();
+
+function removeAllChildren(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
 }
 
+function displayFirstQuestion() {    
+    
+    removeAllChildren(quizContainer);
+    displayQuestion();
+}
+
+function appendQuestionElements() {
+    quizContainer.appendChild(quizQuestionNumber)
+    quizContainer.appendChild(quizQuestion);
+    quizContainer.appendChild(quizListContainer)
+    quizListContainer.appendChild(quizUl);
+    quizUl.appendChild(quizli1);
+    quizUl.appendChild(quizli2);
+    quizUl.appendChild(quizli3);
+    quizUl.appendChild(quizli4);
+}
+
+function updateQuestionElements() {
+    
+    enableListItems();
+
+    quizQuestionNumber.textContent =  "Question " + (currentQuestionIndex + 1) + "/" + questionsArray.length;
+    quizQuestion.textContent = questionsArray[currentQuestionIndex].question;
+    quizli1.textContent = questionsArray[currentQuestionIndex].optionA;
+    quizli2.textContent = questionsArray[currentQuestionIndex].optionB;
+    quizli3.textContent = questionsArray[currentQuestionIndex].optionC;
+    quizli4.textContent = questionsArray[currentQuestionIndex].optionD;   
+}
+
+function checkAnswer(element) {
+    var listItems = quizUl.getElementsByTagName('li');
 
 
+    for (let item of listItems) {        
+        if (item.textContent === element.textContent) {
+            if (element.textContent[0] === questionsArray[currentQuestionIndex].answer) {
+                console.log("Correct answer")
+                element.setAttribute("class", "correct disabled")
+                    
+            } else {
+                console.log("Incorrect answer")
+                element.setAttribute("class", "incorrect disabled")
+            }
+        } else {
+            item.setAttribute("class", "disabled");
+        }                
+    }    
+}
 
-// function currentQuestion (questionArray, questionIndex) {
-function currentQuestion () {    
+function enableListItems() {
+    var listItems = quizUl.getElementsByTagName('li');
+    
+    for (let item of listItems) {
+        item.setAttribute("class", "question");
+    }
+}
+
+function displayQuestion() {    
 
     if (questionsArray[currentQuestionIndex] != undefined) {
         
-        if (currentQuestionIndex === 0){
-            quizContainer.appendChild(quizQuestionNumber)
-            quizContainer.appendChild(quizQuestion);
-            quizContainer.appendChild(quizListContainer)
-            quizListContainer.appendChild(quizUl);
-            quizUl.appendChild(quizli1);
-            quizUl.appendChild(quizli2);
-            quizUl.appendChild(quizli3);
-            quizUl.appendChild(quizli4);
+        if (currentQuestionIndex === 0){            
+            appendQuestionElements();
         }
         
         // Update content based on object in the array
-        quizQuestionNumber.textContent =  "Question " + (currentQuestionIndex + 1) + "/" + questionsArray.length;
-        quizQuestion.textContent = questionsArray[currentQuestionIndex].question;
-        quizli1.textContent = questionsArray[currentQuestionIndex].optionA;
-        quizli2.textContent = questionsArray[currentQuestionIndex].optionB;
-        quizli3.textContent = questionsArray[currentQuestionIndex].optionC;
-        quizli4.textContent = questionsArray[currentQuestionIndex].optionD;       
-        
+        updateQuestionElements();       
         
         
     }
     else {
+        // Submitted answer for final question
         // Provide summary
 
         console.log("Reach last element")
@@ -141,18 +180,7 @@ function submitAnswer(event) {
         
         var displayAnswerTime = 4;
 
-
-
-
-
-
-        if (element.textContent[0] === questionsArray[currentQuestionIndex].answer) {
-            console.log("Correct answer")
-            element.setAttribute("class", "correct disabled")
-        } else {
-            console.log("Incorrect answer")
-            element.setAttribute("class", "incorrect disabled")
-        }
+        checkAnswer(element);       
 
 
         quizAnswerContainer.textContent = "Correct";
@@ -173,20 +201,11 @@ function submitAnswer(event) {
                 clearInterval(timerInterval);
                 
                 console.log("Success")
-                currentQuestionIndex++;
-                currentQuestion(questionsArray, currentQuestionIndex);           
+                displayQuestionIndex++;
+                displayQuestion();           
             }
         }, 1000);   
-
-
-        // quizAnswerContainer.setAttribute("data-state", "visible");
-        
-        
-        
-    } else {
-        console.log("Not an li element")
-    }
-
+    } 
 }
 
 
@@ -196,7 +215,7 @@ function submitAnswer(event) {
 
 // Event listeners
 quizUl.addEventListener("click", submitAnswer);
-startQuizButton.addEventListener("click", removeWelcomeScreen)
+startQuizButton.addEventListener("click", displayFirstQuestion)
 
 // Display welcome screen
 // showWelcomeScreen()
