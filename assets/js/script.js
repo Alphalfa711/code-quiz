@@ -2,11 +2,17 @@
 const questionsArray = [
     {
         question: "Arrays in JavaScript can be used to store _____.",
-        optionA: "a. numbers and strings",
-        optionB: "b. other arrays",
-        optionC: "c. booleans",
-        optionD: "d. all of the above",
-        answer: "d"        
+        // optionA: "a. numbers and strings",
+        // optionB: "b. other arrays",
+        // optionC: "c. booleans",
+        // optionD: "d. all of the above",
+        answers: [
+            "a. numbers and strings",
+            "b. other arrays",
+            "c. booleans",
+            "d. all of the above"
+        ],
+        correctAnswer: "d"        
     },
     {
         question: "Loos in JS:",
