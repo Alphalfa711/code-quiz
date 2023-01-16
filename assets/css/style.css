@@ -55,10 +55,12 @@ p {
     background-color: aquamarine;
 } */
 
+
 #quiz-container {
     width: 600px; 
     display: flex;
     flex-direction: column;     
+    padding: 2rem;
 }
 
 .center {
@@ -154,4 +156,13 @@ ul {
 
 .button.start:hover {
     background-color: #2ed3b7;    
+}
+
+@media screen and (max-width: 500px) {  
+    html {
+        font-size: 80%;
+    }
+    main {
+        padding-top: 1rem;
+    }
 }

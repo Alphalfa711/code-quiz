@@ -74,6 +74,7 @@ startQuizButton.textContent = "Start Quiz";
 var summaryTitle = document.createElement('h2');
     
 var summaryScore = document.createElement('p')
+
     
 
 // Quiz question container
