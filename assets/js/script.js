@@ -76,20 +76,56 @@ var timerAnswer = document.createElement('div')
 timerAnswer.setAttribute("class", "timer");
 var remainingTimeDisplay = document.getElementById('timeLeft');
 
+function endQuiz(timer) {
+    remainingTimeDisplay.textContent = remainingTime + "s";         
+    clearInterval(timer);
+    alert("Quiz ended");
+}
 
 
 
 
 
 
-
-function quizReset() {
+function prepareQuiz() {
 
     remainingTime = 90;
     currentQuestionIndex = 0;
-    
+    remainingTimeDisplay.textContent = remainingTime + "s";
+
     showWelcomeScreen();
 }
+
+function startQuiz() {
+
+
+    var trackRemainingTime = setInterval(function() {
+
+        if (remainingTime > 0) {
+            remainingTime--;
+            remainingTimeDisplay.textContent = remainingTime + "s";         
+
+
+
+
+
+
+
+        } else {
+            // clearInterval(trackRemainingTime);
+            remainingTimeDisplay.textContent = remainingTime + "s";         
+            endQuiz(trackRemainingTime);
+        }     
+    }, 1000);
+
+
+
+
+
+    
+    displayFirstQuestion();    
+}
+
 
 function showWelcomeScreen() {
     quizContainer.appendChild(startHeader);
@@ -171,6 +207,7 @@ function checkAnswer(element) {
                     
             } else {
                 // console.log("Incorrect answer")
+                remainingTime-=10;
                 element.setAttribute("class", "incorrect disabled")
                 quizFeedbackContainer.textContent = "Wrong";
             }
@@ -215,9 +252,9 @@ function submitAnswer(event) {
     if (element.matches('li')) {
         
         // var displayAnswerTime = 4;
-        var displayAnswerTime = 4;
+        var displayAnswerTime = 5;
 
-        timerAnswer.textContent = displayAnswerTime + 1;
+        timerAnswer.textContent = displayAnswerTime;
         
         
         
@@ -232,9 +269,9 @@ function submitAnswer(event) {
         // Display a box with with correct or wrong status for 5 sec
         var timerInterval = setInterval(function() {
 
-            if (displayAnswerTime > 0) {     
-                timerAnswer.textContent = displayAnswerTime;
+            if (displayAnswerTime > 1) {     
                 displayAnswerTime--;
+                timerAnswer.textContent = displayAnswerTime;
             } else {
                 quizContainer.removeChild(timerAnswer);
                 quizContainer.removeChild(quizFeedbackContainer);
@@ -255,8 +292,8 @@ function submitAnswer(event) {
 
 // Event listeners
 quizUl.addEventListener("click", submitAnswer);
-startQuizButton.addEventListener("click", displayFirstQuestion)
+startQuizButton.addEventListener("click", startQuiz)
 
 // Display welcome screen
 // showWelcomeScreen()
-startQuiz()
+prepareQuiz()
