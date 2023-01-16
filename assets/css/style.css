@@ -100,16 +100,21 @@ ul {
 .feedback-container {
     border-top: 1px solid black;
     padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+
+.feedback {
+    padding: .5rem;
+    font-size: 1.5rem;    
 }
 
 .button {
     transition: 0.2s;
     margin-bottom: .5rem;    
-    /* font-size: 1.1rem; */
     padding: .5rem;       
-    /* background-color: #1fc5a8; */
-    /* color: white; */
-    /* font-weight: bold; */
+    background-color: #ff9c60;    
     font-size: 1.5rem;
     border-radius: 5px;
     border: none;    
@@ -120,6 +125,7 @@ ul {
 .button:hover {    
     transition: 0.2s;
     cursor: pointer;
+    background-color: #ffd6b8;
 }
 
 .button:active {
