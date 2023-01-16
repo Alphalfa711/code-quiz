@@ -44,7 +44,7 @@ const questionsArray = [
 
 // Defining Global variables
 var currentQuestionIndex = 0;
-const timeLimit = 30;
+const timeLimit = 500;
 var remainingTime;
 var correctAnswers = 0;
 var invalidAnswers = 0;
@@ -134,24 +134,24 @@ function prepareQuiz() {
 function startQuiz() {
 
 
-    trackRemainingTime = setInterval(function() {
+    // trackRemainingTime = setInterval(function() {
 
-        if (remainingTime > 0) {
-            remainingTime--;
-            remainingTimeDisplay.textContent = remainingTime + "s";         
-
-
+    //     if (remainingTime > 0) {
+    //         remainingTime--;
+    //         remainingTimeDisplay.textContent = remainingTime + "s";         
 
 
 
 
 
-        } else {
-            // clearInterval(trackRemainingTime);
-            remainingTimeDisplay.textContent = remainingTime + "s";         
-            endQuiz();
-        }     
-    }, 1000);
+
+
+    //     } else {
+    //         // clearInterval(trackRemainingTime);
+    //         remainingTimeDisplay.textContent = remainingTime + "s";         
+    //         endQuiz();
+    //     }     
+    // }, 1000);
     
     displayFirstQuestion();    
 }
@@ -336,13 +336,7 @@ function showFeedback() {
         nextButton.textContent = "Next question >";
     }
     
-    nextButton.addEventListener("click", function (){
-            quizContainer.removeChild(quizFeedbackContainer);             
-            currentQuestionIndex++;
-            displayQuestion();                
-            
-        })           
-    }
+}
 
 
 // function checkAnswer(element) {
@@ -379,7 +373,16 @@ function showFeedback() {
 
 // Event listeners
 quizUl.addEventListener("click", submitAnswer);
-startQuizButton.addEventListener("click", startQuiz)
+startQuizButton.addEventListener("click", startQuiz);
+
+nextButton.addEventListener("click", function (){
+    removeAllChildren(quizFeedbackContainer);
+    quizContainer.removeChild(quizFeedbackContainer);             
+    currentQuestionIndex++;
+    displayQuestion();                
+    
+});
+
 
 // Display welcome screen
 // showWelcomeScreen()
