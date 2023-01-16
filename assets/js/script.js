@@ -31,43 +31,20 @@ const questionsArray = [
         questionAnswer: "d"
     },
     {
-<<<<<<< HEAD
         question: "How do we write comment in javascript?",
         answers: [
             "a. /* */",
             "b. //",
             "c. #",
             "d. $$"
-=======
-        question: "Scope in JS:",
-        answers: [
-            "a. array3 q1",
-            "b. array3 q2",
-            "c. array3 q3",
-            "d. array3 q4"
         ],
         questionAnswer: "b"
-    },
-    {
-        question: "Scope in JS:",
-        answers: [
-            "a. array4 q1",
-            "b. array4 q2",
-            "c. array4 q3",
-            "d. array4 q4"
->>>>>>> 7d6ffe8354e07c818640f10e966657845eae9675
-        ],
-        questionAnswer: "b"
-    }  
+    },    
 ]
 
 // Defining Global variables
 var currentQuestionIndex = 0;
-<<<<<<< HEAD
-const timeLimit = 90
-=======
-const timeLimit = 20;
->>>>>>> 7d6ffe8354e07c818640f10e966657845eae9675
+const timeLimit = 90;
 var remainingTime;
 var correctAnswers = 0;
 var invalidAnswers = 0;
@@ -181,7 +158,6 @@ function showWelcomeScreen() {
 
 
 
-<<<<<<< HEAD
 
 
 
@@ -218,8 +194,6 @@ function removeAllChildren(parent) {
     }
 }
 
-=======
->>>>>>> 7d6ffe8354e07c818640f10e966657845eae9675
 function displayFirstQuestion() {    
     
     removeAllChildren(quizContainer);
