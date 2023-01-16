@@ -44,7 +44,7 @@ const questionsArray = [
 
 // Defining Global variables
 var currentQuestionIndex = 0;
-const timeLimit = 500;
+const timeLimit = 20;
 var remainingTime;
 var correctAnswers = 0;
 var invalidAnswers = 0;
@@ -107,15 +107,13 @@ var remainingTimeDisplay = document.getElementById('timeLeft');
 
 
 
-function endQuiz() {
-    removeAllChildren(quizContainer);
-    remainingTimeDisplay.textContent = remainingTime + "s";         
-    clearInterval(trackRemainingTime);    
-    showSummaryScreen();    
+function removeAllChildren(parent) {
+    console.log("Parent item: " ,parent);
+    while (parent.firstChild) {
+        console.log("First child: ", parent.firstChild);
+        parent.removeChild(parent.firstChild);
+    }
 }
-
-
-
 
 
 
@@ -133,31 +131,25 @@ function prepareQuiz() {
 
 function startQuiz() {
 
+    trackRemainingTime = setInterval(function() {
 
-    // trackRemainingTime = setInterval(function() {
+        if (remainingTime > 0) {
+            remainingTime--;
+            remainingTimeDisplay.textContent = remainingTime + "s";         
 
-    //     if (remainingTime > 0) {
-    //         remainingTime--;
-    //         remainingTimeDisplay.textContent = remainingTime + "s";         
-
-
-
-
-
-
-
-    //     } else {
-    //         // clearInterval(trackRemainingTime);
-    //         remainingTimeDisplay.textContent = remainingTime + "s";         
-    //         endQuiz();
-    //     }     
-    // }, 1000);
+        } else {
+            // clearInterval(trackRemainingTime);
+            remainingTimeDisplay.textContent = remainingTime + "s";         
+            endQuiz();
+        }     
+    }, 1000);
     
     displayFirstQuestion();    
 }
 
 
-function showWelcomeScreen() {
+function showWelcomeScreen() { 
+
     quizContainer.appendChild(startHeader);
     quizContainer.appendChild(startMessage1);
     quizContainer.appendChild(startMessage2);
@@ -165,42 +157,6 @@ function showWelcomeScreen() {
 }
 
 
-
-
-
-
-function showSummaryScreen() {
-    finalScore = correctAnswers / questionsArray.length
-
-    if (remainingTime > 0) {
-        summaryTitle.textContent = "All done!"
-    } else {
-        summaryTitle.textContent = "Time's up!"
-    }
-
-    quizContainer.appendChild(summaryTitle);
-        
-    summaryScore.textContent = "Your final score is " + (finalScore * 100); 
-    // summaryScore.textContent = "Your final score is ";
-    quizContainer.appendChild(summaryScore);
-    
-    
-}
-
-
-
-
-
-
-
-
-function removeAllChildren(parent) {
-    console.log("Parent item: " ,parent);
-    while (parent.firstChild) {
-        console.log("First child: ", parent.firstChild);
-        parent.removeChild(parent.firstChild);
-    }
-}
 
 function displayFirstQuestion() {    
     
@@ -318,9 +274,6 @@ function submitAnswer(event) {
         }    
     }
 }      
-        
-        
-            // checkAnswer(element);       
 
 function showFeedback() {
 
@@ -338,52 +291,41 @@ function showFeedback() {
     
 }
 
-
-// function checkAnswer(element) {
-//     var listItems = quizUl.querySelectorAll('li');
-
-
-//     for (item of listItems) {        
-//         if (item.textContent === element.textContent) {
-//             if (element.textContent[0] === questionsArray[currentQuestionIndex].questionAnswer) {
-//                 // console.log("Correct answer")
-//                 element.setAttribute("class", "correct disabled")
-//                 quizFeedback.textContent = "Correct";
-//                 correctAnswers++;
-//             } else {
-//                 // console.log("Incorrect answer")
-//                 element.setAttribute("class", "incorrect disabled")
-//                 quizFeedback.textContent = "Wrong";
-//                 invalidAnswers++;
-//                 if (remainingTime > 10) {
-//                     remainingTime-=10;
-//                 } else {
-//                     remainingTime = 0;
-//                 }
-//             }
-//         } else {
-//             item.setAttribute("class", "disabled");
-//         }                
-//     }    
-// }
+function endQuiz() {
+    removeAllChildren(quizContainer);
+    remainingTimeDisplay.textContent = remainingTime + "s";         
+    clearInterval(trackRemainingTime);    
+    showSummaryScreen();    
+}
 
 
+function showSummaryScreen() {
+    finalScore = correctAnswers / questionsArray.length
 
+    if (remainingTime > 0) {
+        summaryTitle.textContent = "All done!"
+    } else {
+        summaryTitle.textContent = "Time's up!"
+    }
 
+    quizContainer.appendChild(summaryTitle);
+        
+    summaryScore.textContent = "Your final score is " + (finalScore * 100); 
+    quizContainer.appendChild(summaryScore);    
+}
 
 // Event listeners
 quizUl.addEventListener("click", submitAnswer);
+
 startQuizButton.addEventListener("click", startQuiz);
 
 nextButton.addEventListener("click", function (){
     removeAllChildren(quizFeedbackContainer);
     quizContainer.removeChild(quizFeedbackContainer);             
     currentQuestionIndex++;
-    displayQuestion();                
-    
+    displayQuestion();               
 });
 
 
 // Display welcome screen
-// showWelcomeScreen()
 prepareQuiz()
