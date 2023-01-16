@@ -72,9 +72,19 @@ var quizli = document.createElement('li')
 // Display correct / wrong answer
 var quizFeedbackContainer = document.createElement('div')    
     quizFeedbackContainer.setAttribute("class", "feedback-container")
-var timerAnswer = document.createElement('div')
-timerAnswer.setAttribute("class", "timer");
+
+var quizFeedback = document.createElement('div');
+quizFeedback.setAttribute('class', "feedback")
+
+
+var nextButton = document.createElement('button');
+    nextButton.setAttribute('class', 'button');
+    nextButton.textContent = "Next question >";
+
+
 var remainingTimeDisplay = document.getElementById('timeLeft');
+
+
 
 function endQuiz(timer) {
     remainingTimeDisplay.textContent = remainingTime + "s";         
@@ -117,11 +127,6 @@ function startQuiz() {
             endQuiz(trackRemainingTime);
         }     
     }, 1000);
-
-
-
-
-
     
     displayFirstQuestion();    
 }
@@ -203,13 +208,13 @@ function checkAnswer(element) {
             if (element.textContent[0] === questionsArray[currentQuestionIndex].correctAnswer) {
                 // console.log("Correct answer")
                 element.setAttribute("class", "correct disabled")
-                quizFeedbackContainer.textContent = "Correct";
+                quizFeedback.textContent = "Correct";
                     
             } else {
                 // console.log("Incorrect answer")
                 remainingTime-=10;
                 element.setAttribute("class", "incorrect disabled")
-                quizFeedbackContainer.textContent = "Wrong";
+                quizFeedback.textContent = "Wrong";
             }
         } else {
             item.setAttribute("class", "disabled");
@@ -251,39 +256,37 @@ function submitAnswer(event) {
     var element = event.target;
     if (element.matches('li')) {
         
-        // var displayAnswerTime = 4;
-        var displayAnswerTime = 5;
-
-        timerAnswer.textContent = displayAnswerTime;
-        
-        
-        
         checkAnswer(element);       
         
-        
-        quizContainer.appendChild(quizFeedbackContainer);
-        quizContainer.append(timerAnswer);
-        
-        
 
-        // Display a box with with correct or wrong status for 5 sec
-        var timerInterval = setInterval(function() {
 
-            if (displayAnswerTime > 1) {     
-                displayAnswerTime--;
-                timerAnswer.textContent = displayAnswerTime;
-            } else {
-                quizContainer.removeChild(timerAnswer);
-                quizContainer.removeChild(quizFeedbackContainer);
-                clearInterval(timerInterval);
-                
-                console.log("Success")
-                currentQuestionIndex++;
-                displayQuestion();           
-            }
-        }, 1000);   
-    } 
+
+        quizContainer.appendChild(quizFeedbackContainer);       
+        quizFeedbackContainer.appendChild(quizFeedback);
+        quizFeedbackContainer.appendChild(nextButton);
+        
+        
+        if (questionsArray[currentQuestionIndex + 1] == undefined) {
+            nextButton.textContent = "Finish";                
+        } else {
+            nextButton.textContent = "Next question >";
+        }
+        
+        
+        nextButton.addEventListener("click", function (){
+            quizContainer.removeChild(quizFeedbackContainer);             
+            currentQuestionIndex++;
+            displayQuestion();                
+            
+        })           
+    }
 }
+
+        
+
+
+    
+
 
 
 
