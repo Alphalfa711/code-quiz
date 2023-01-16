@@ -20,36 +20,37 @@ const questionsArray = [
         ],
         questionAnswer: "a"
     },
-    // {
-    //     question: "Scope in JS:",
-    //     answers: [
-    //         "a. array3 q1",
-    //         "b. array3 q2",
-    //         "c. array3 q3",
-    //         "d. array3 q4"
-    //     ],
-    //     questionAnswer: "b"
-    // },
-    // {
-    //     question: "Scope in JS:",
-    //     answers: [
-    //         "a. array4 q1",
-    //         "b. array4 q2",
-    //         "c. array4 q3",
-    //         "d. array4 q4"
-    //     ],
-    //     questionAnswer: "b"
-    // }  
+    {
+        question: "Scope in JS:",
+        answers: [
+            "a. array3 q1",
+            "b. array3 q2",
+            "c. array3 q3",
+            "d. array3 q4"
+        ],
+        questionAnswer: "b"
+    },
+    {
+        question: "Scope in JS:",
+        answers: [
+            "a. array4 q1",
+            "b. array4 q2",
+            "c. array4 q3",
+            "d. array4 q4"
+        ],
+        questionAnswer: "b"
+    }  
 ]
 
 // Defining Global variables
 var currentQuestionIndex = 0;
-const timeLimit = 10
+const timeLimit = 30;
 var remainingTime;
 var correctAnswers = 0;
 var invalidAnswers = 0;
 var finalScore = 0;
 var trackRemainingTime;
+var isLastQuestion = false;
 // Creating DOM Elements
 
 
@@ -124,6 +125,7 @@ function prepareQuiz() {
     currentQuestionIndex = 0;
     correctAnswers = 0;
     invalidAnswers = 0;
+    isLastQuestion = false;
     remainingTimeDisplay.textContent = remainingTime + "s";
 
     showWelcomeScreen();
@@ -251,34 +253,6 @@ function updateQuestionElements() {
     // console.log("By query selector: ", listItems)
 }
 
-function checkAnswer(element) {
-    var listItems = quizUl.querySelectorAll('li');
-
-
-    for (item of listItems) {        
-        if (item.textContent === element.textContent) {
-            if (element.textContent[0] === questionsArray[currentQuestionIndex].questionAnswer) {
-                // console.log("Correct answer")
-                element.setAttribute("class", "correct disabled")
-                quizFeedback.textContent = "Correct";
-                correctAnswers++;
-            } else {
-                // console.log("Incorrect answer")
-                element.setAttribute("class", "incorrect disabled")
-                quizFeedback.textContent = "Wrong";
-                invalidAnswers++;
-                if (remainingTime > 10) {
-                    remainingTime-=10;
-                } else {
-                    remainingTime = 0;
-                }
-            }
-        } else {
-            item.setAttribute("class", "disabled");
-        }                
-    }    
-}
-
 function enableListItems() {
     var listItems = quizUl.querySelectorAll('li');
     
@@ -313,26 +287,94 @@ function submitAnswer(event) {
     var element = event.target;
     if (element.matches('li')) {
         
-        checkAnswer(element);       
+        showFeedback()
         
-        quizContainer.appendChild(quizFeedbackContainer);       
-        quizFeedbackContainer.appendChild(quizFeedback);
-        quizFeedbackContainer.appendChild(nextButton);
+        var listItems = quizUl.querySelectorAll('li');
+
+        for (item of listItems) {        
+            if (item.textContent === element.textContent) {
+                if (element.textContent[0] === questionsArray[currentQuestionIndex].questionAnswer) {
+                    // console.log("Correct answer")
+                    element.setAttribute("class", "correct disabled")
+                    quizFeedback.textContent = "Correct";
+                    correctAnswers++;
+                } else {
+                    // console.log("Incorrect answer")
+                    element.setAttribute("class", "incorrect disabled")
+                    quizFeedback.textContent = "Wrong";
+                    invalidAnswers++;
+                    if (remainingTime > 10) {
+                        if (!isLastQuestion) {
+                            remainingTime-=10;
+                        }
+                    } else {
+                        remainingTime = 0;
+                        endQuiz();
+                    }
+                }
+            } else {
+                item.setAttribute("class", "disabled");
+            }                
+        }    
+    }
+}      
         
-        if (questionsArray[currentQuestionIndex + 1] == undefined) {
-            nextButton.textContent = "Finish";                
-        } else {
-            nextButton.textContent = "Next question >";
-        }
         
-        nextButton.addEventListener("click", function (){
+            // checkAnswer(element);       
+
+function showFeedback() {
+
+    quizContainer.appendChild(quizFeedbackContainer);       
+    quizFeedbackContainer.appendChild(quizFeedback);
+    quizFeedbackContainer.appendChild(nextButton);
+    
+    if (questionsArray[currentQuestionIndex + 1] == undefined) {
+        isLastQuestion = true;
+        nextButton.textContent = "Check Score";           
+        clearInterval(trackRemainingTime);
+    } else {
+        nextButton.textContent = "Next question >";
+    }
+    
+    nextButton.addEventListener("click", function (){
             quizContainer.removeChild(quizFeedbackContainer);             
             currentQuestionIndex++;
             displayQuestion();                
             
         })           
     }
-}
+
+
+// function checkAnswer(element) {
+//     var listItems = quizUl.querySelectorAll('li');
+
+
+//     for (item of listItems) {        
+//         if (item.textContent === element.textContent) {
+//             if (element.textContent[0] === questionsArray[currentQuestionIndex].questionAnswer) {
+//                 // console.log("Correct answer")
+//                 element.setAttribute("class", "correct disabled")
+//                 quizFeedback.textContent = "Correct";
+//                 correctAnswers++;
+//             } else {
+//                 // console.log("Incorrect answer")
+//                 element.setAttribute("class", "incorrect disabled")
+//                 quizFeedback.textContent = "Wrong";
+//                 invalidAnswers++;
+//                 if (remainingTime > 10) {
+//                     remainingTime-=10;
+//                 } else {
+//                     remainingTime = 0;
+//                 }
+//             }
+//         } else {
+//             item.setAttribute("class", "disabled");
+//         }                
+//     }    
+// }
+
+
+
 
 
 // Event listeners
