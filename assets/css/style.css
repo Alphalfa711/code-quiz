@@ -13,6 +13,7 @@
 
 * {    
     color: var(--font-color);
+    /* font-size: 1.1rem; */
 }
 
 body {
@@ -23,6 +24,7 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 1rem;
+    font-size: 1.5rem;
 }
 
 main {
@@ -31,10 +33,18 @@ main {
     padding-top: 10vh;
 }
 
+h2 {    
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
 
+h4 {
+    margin-bottom: 1rem;
+}
 
 p {
     line-height: 1.5rem;
+    font-size: 1.1rem;
 }
 
 .scores {
@@ -87,19 +97,20 @@ ul {
 #list-container {
     display: flex;   
 }
-
-.answerContainer {
+.feedback-container {
     border-top: 1px solid black;
+    padding: 1rem;
 }
 
 .button {
     transition: 0.2s;
     margin-bottom: .5rem;    
     /* font-size: 1.1rem; */
-    padding: .5rem;    
-    margin-top: 1rem;    
+    padding: .5rem;       
     /* background-color: #1fc5a8; */
-    color: white;
+    /* color: white; */
+    /* font-weight: bold; */
+    font-size: 1.5rem;
     border-radius: 5px;
     border: none;    
     box-shadow: var(--box-shadow);
@@ -130,10 +141,11 @@ ul {
     pointer-events: none;    
 }
 
-.button.start {
+.button.start {    
     background-color: #1fc5a8;
+    margin-top: 1rem;
 }
 
 .button.start:hover {
-    background-color: #2ed3b7;
+    background-color: #2ed3b7;    
 }
