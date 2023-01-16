@@ -8,7 +8,7 @@ const questionsArray = [
             "c. booleans",
             "d. all of the above"
         ],
-        correctAnswer: "d"        
+        questionAnswer: "d"        
     },
     {
         question: "Loos in JS:",
@@ -18,28 +18,42 @@ const questionsArray = [
             "c. array2 q3",
             "d. array2 q4"
         ],
-        correctAnswer: "a"
+        questionAnswer: "a"
     },
-    {
-        question: "Scope in JS:",
-        answers: [
-            "a. array3 q1",
-            "b. array3 q2",
-            "c. array3 q3",
-            "d. array3 q4"
-        ],
-        correctAnswer: "b"
-    }  
+    // {
+    //     question: "Scope in JS:",
+    //     answers: [
+    //         "a. array3 q1",
+    //         "b. array3 q2",
+    //         "c. array3 q3",
+    //         "d. array3 q4"
+    //     ],
+    //     questionAnswer: "b"
+    // },
+    // {
+    //     question: "Scope in JS:",
+    //     answers: [
+    //         "a. array4 q1",
+    //         "b. array4 q2",
+    //         "c. array4 q3",
+    //         "d. array4 q4"
+    //     ],
+    //     questionAnswer: "b"
+    // }  
 ]
 
 // Defining Global variables
-var currentQuestionIndex;
+var currentQuestionIndex = 0;
+const timeLimit = 10
 var remainingTime;
-
+var correctAnswers = 0;
+var invalidAnswers = 0;
+var finalScore = 0;
+var trackRemainingTime;
 // Creating DOM Elements
 
 
-// Quiz welcome/start screen
+// Quiz welcome/start screen elements
 var startHeader = document.createElement('h2');
 startHeader.setAttribute("class", "center");
 startHeader.textContent = "Coding Quiz Challenge";
@@ -54,6 +68,12 @@ startQuizButton.setAttribute("class", "button start");
 startQuizButton.textContent = "Start Quiz";
 
 
+
+// Quiz summary screen elements
+var summaryTitle = document.createElement('h2');
+    
+var summaryScore = document.createElement('p')
+    
 
 // Quiz question container
 var quizContainer = document.getElementById('quiz-container');
@@ -79,17 +99,18 @@ quizFeedback.setAttribute('class', "feedback")
 
 var nextButton = document.createElement('button');
     nextButton.setAttribute('class', 'button');
-    nextButton.textContent = "Next question >";
+    // nextButton.textContent = "Next question >";
 
 
 var remainingTimeDisplay = document.getElementById('timeLeft');
 
 
 
-function endQuiz(timer) {
+function endQuiz() {
+    removeAllChildren(quizContainer);
     remainingTimeDisplay.textContent = remainingTime + "s";         
-    clearInterval(timer);
-    alert("Quiz ended");
+    clearInterval(trackRemainingTime);    
+    showSummaryScreen();    
 }
 
 
@@ -99,8 +120,10 @@ function endQuiz(timer) {
 
 function prepareQuiz() {
 
-    remainingTime = 90;
+    remainingTime = timeLimit;
     currentQuestionIndex = 0;
+    correctAnswers = 0;
+    invalidAnswers = 0;
     remainingTimeDisplay.textContent = remainingTime + "s";
 
     showWelcomeScreen();
@@ -109,7 +132,7 @@ function prepareQuiz() {
 function startQuiz() {
 
 
-    var trackRemainingTime = setInterval(function() {
+    trackRemainingTime = setInterval(function() {
 
         if (remainingTime > 0) {
             remainingTime--;
@@ -124,7 +147,7 @@ function startQuiz() {
         } else {
             // clearInterval(trackRemainingTime);
             remainingTimeDisplay.textContent = remainingTime + "s";         
-            endQuiz(trackRemainingTime);
+            endQuiz();
         }     
     }, 1000);
     
@@ -138,6 +161,35 @@ function showWelcomeScreen() {
     quizContainer.appendChild(startMessage2);
     quizContainer.appendChild(startQuizButton);    
 }
+
+
+
+
+
+
+function showSummaryScreen() {
+    finalScore = correctAnswers / questionsArray.length
+
+    if (remainingTime > 0) {
+        summaryTitle.textContent = "All done!"
+    } else {
+        summaryTitle.textContent = "Time's up!"
+    }
+
+    quizContainer.appendChild(summaryTitle);
+        
+    summaryScore.textContent = "Your final score is " + (finalScore * 100); 
+    // summaryScore.textContent = "Your final score is ";
+    quizContainer.appendChild(summaryScore);
+    
+    
+}
+
+
+
+
+
+
 
 
 function removeAllChildren(parent) {
@@ -205,16 +257,21 @@ function checkAnswer(element) {
 
     for (item of listItems) {        
         if (item.textContent === element.textContent) {
-            if (element.textContent[0] === questionsArray[currentQuestionIndex].correctAnswer) {
+            if (element.textContent[0] === questionsArray[currentQuestionIndex].questionAnswer) {
                 // console.log("Correct answer")
                 element.setAttribute("class", "correct disabled")
                 quizFeedback.textContent = "Correct";
-                    
+                correctAnswers++;
             } else {
                 // console.log("Incorrect answer")
-                remainingTime-=10;
                 element.setAttribute("class", "incorrect disabled")
                 quizFeedback.textContent = "Wrong";
+                invalidAnswers++;
+                if (remainingTime > 10) {
+                    remainingTime-=10;
+                } else {
+                    remainingTime = 0;
+                }
             }
         } else {
             item.setAttribute("class", "disabled");
@@ -246,9 +303,9 @@ function displayQuestion() {
     }
     else {
         // Submitted answer for final question
-        // Provide summary
-
-        console.log("Reach last element")
+        // Provide summary        
+        // removeAllChildren(quizContainer);
+        endQuiz();
     }
 }
 
