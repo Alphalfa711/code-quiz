@@ -258,20 +258,15 @@ function submitAnswer(event) {
         
         checkAnswer(element);       
         
-
-
-
         quizContainer.appendChild(quizFeedbackContainer);       
         quizFeedbackContainer.appendChild(quizFeedback);
         quizFeedbackContainer.appendChild(nextButton);
-        
         
         if (questionsArray[currentQuestionIndex + 1] == undefined) {
             nextButton.textContent = "Finish";                
         } else {
             nextButton.textContent = "Next question >";
         }
-        
         
         nextButton.addEventListener("click", function (){
             quizContainer.removeChild(quizFeedbackContainer);             
@@ -281,16 +276,6 @@ function submitAnswer(event) {
         })           
     }
 }
-
-        
-
-
-    
-
-
-
-
-
 
 
 // Event listeners
