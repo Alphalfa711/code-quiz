@@ -1,50 +1,50 @@
 // Declare array of objects/questions
 const questionsArray = [
     {
-        question: "Arrays in JavaScript can be used to store _____.",
+        question: "Arrays in JavaScript are defined by which of the following statements?",
         answers: [
-            "a. numbers and strings",
-            "b. other arrays",
-            "c. booleans",
-            "d. all of the above"
+            "a. It is an ordered list of values",
+            "b. It is an ordered list of objects",
+            "c. It is an ordered list of string",
+            "d. It is an ordered list of functions"
         ],
-        questionAnswer: "d"        
+        questionAnswer: "a"        
     },
     {
-        question: "Loos in JS:",
+        question: "Which of the following is correct about JavaScript?",
         answers: [
-            "a. array2 q1",
-            "b. array2 q2",
-            "c. array2 q3",
-            "d. array2 q4"
+            "a. JavaScript is an Object-Based language",
+            "b. JavaScript is Assembly-language",
+            "c. JavaScript is an Object-Oriented language",
+            "d. JavaScript is a High-level language"
         ],
         questionAnswer: "a"
+    },    
+    {
+        question: "Which of the following are not server-side Javascript objects?",
+        answers: [
+            "a. Date",
+            "b. FileUpload",
+            "c. Function",
+            "d. All of the above"
+        ],
+        questionAnswer: "d"
     },
-    // {
-    //     question: "Scope in JS:",
-    //     answers: [
-    //         "a. array3 q1",
-    //         "b. array3 q2",
-    //         "c. array3 q3",
-    //         "d. array3 q4"
-    //     ],
-    //     questionAnswer: "b"
-    // },
-    // {
-    //     question: "Scope in JS:",
-    //     answers: [
-    //         "a. array4 q1",
-    //         "b. array4 q2",
-    //         "c. array4 q3",
-    //         "d. array4 q4"
-    //     ],
-    //     questionAnswer: "b"
-    // }  
+    {
+        question: "How do we write comment in javascript?",
+        answers: [
+            "a. /* */",
+            "b. //",
+            "c. #",
+            "d. $$"
+        ],
+        questionAnswer: "b"
+    }  
 ]
 
 // Defining Global variables
 var currentQuestionIndex = 0;
-const timeLimit = 10
+const timeLimit = 90
 var remainingTime;
 var correctAnswers = 0;
 var invalidAnswers = 0;
@@ -178,7 +178,7 @@ function showSummaryScreen() {
 
     quizContainer.appendChild(summaryTitle);
         
-    summaryScore.textContent = "Your final score is " + (finalScore * 100); 
+    summaryScore.textContent = "Your final score is " + parseInt(finalScore * 100); 
     // summaryScore.textContent = "Your final score is ";
     quizContainer.appendChild(summaryScore);
     
