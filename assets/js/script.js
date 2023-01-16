@@ -20,16 +20,7 @@ const questionsArray = [
         ],
         correctAnswer: "a"
     },
-    {
-        question: "Scope in JS:",
-        answers: [
-            "a. array3 q1",
-            "b. array3 q2",
-            "c. array3 q3",
-            "d. array3 q4"
-        ],
-        correctAnswer: "b"
-    }  
+ 
 ]
 
 // Defining Global variables
