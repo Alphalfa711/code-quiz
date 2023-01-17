@@ -75,8 +75,6 @@ var summaryTitle = document.createElement('h2');
     
 var summaryScore = document.createElement('p')
 
-    
-
 // Quiz question container
 var quizContainer = document.getElementById('quiz-container');
 // Question number
@@ -109,17 +107,19 @@ var remainingTimeDisplay = document.getElementById('timeLeft');
 
 
 function removeAllChildren(parent) {
-    console.log("Parent item: " ,parent);
+    // console.log("Parent item: " ,parent);
     while (parent.firstChild) {
-        console.log("First child: ", parent.firstChild);
+        // console.log("First child: ", parent.firstChild);
         parent.removeChild(parent.firstChild);
     }
 }
 
 
 
-function prepareQuiz() {
 
+function prepareQuiz() {
+    
+    // Reset all variables
     remainingTime = timeLimit;
     currentQuestionIndex = 0;
     correctAnswers = 0;
@@ -155,45 +155,11 @@ function showWelcomeScreen() {
     quizContainer.appendChild(startMessage1);
     quizContainer.appendChild(startMessage2);
     quizContainer.appendChild(startQuizButton);    
+
+    // add text field for name/initials
+
 }
 
-
-
-
-
-
-function showSummaryScreen() {
-    finalScore = correctAnswers / questionsArray.length
-
-    if (remainingTime > 0) {
-        summaryTitle.textContent = "All done!"
-    } else {
-        summaryTitle.textContent = "Time's up!"
-    }
-
-    quizContainer.appendChild(summaryTitle);
-        
-    summaryScore.textContent = "Your final score is " + parseInt(finalScore * 100); 
-    // summaryScore.textContent = "Your final score is ";
-    quizContainer.appendChild(summaryScore);
-    
-    
-}
-
-
-
-
-
-
-
-
-function removeAllChildren(parent) {
-    console.log("Parent item: " ,parent);
-    while (parent.firstChild) {
-        console.log("First child: ", parent.firstChild);
-        parent.removeChild(parent.firstChild);
-    }
-}
 
 function displayFirstQuestion() {    
     
@@ -352,9 +318,9 @@ function showSummaryScreen() {
 }
 
 // Event listeners
-quizUl.addEventListener("click", submitAnswer);
-
 startQuizButton.addEventListener("click", startQuiz);
+
+quizUl.addEventListener("click", submitAnswer);
 
 nextButton.addEventListener("click", function (){
     removeAllChildren(quizFeedbackContainer);

@@ -85,7 +85,7 @@ ul {
 }
 
 .question {
-    background-color: #ff9c60;    
+    background-color: #ff9c60;        
 }
 
 .question:hover {
@@ -116,7 +116,7 @@ ul {
     transition: 0.2s;
     margin-bottom: .5rem;    
     padding: .5rem;       
-    background-color: #ff9c60;    
+    background-color: #ff9c60;   
     font-size: 1.5rem;
     border-radius: 5px;
     border: none;    
@@ -152,10 +152,12 @@ ul {
 .button.start {    
     background-color: #1fc5a8;
     margin-top: 1rem;
+    color: var(--body-bg-color);
 }
 
 .button.start:hover {
     background-color: #2ed3b7;    
+    
 }
 
 @media screen and (max-width: 500px) {  
