@@ -44,7 +44,7 @@ const questionsArray = [
 
 // Defining Global variables
 var currentQuestionIndex = 0;
-const timeLimit = 90;
+const timeLimit = 7;
 var remainingTime;
 var correctAnswers = 0;
 var invalidAnswers = 0;
@@ -114,6 +114,21 @@ function removeAllChildren(parent) {
     }
 }
 
+function displayRemainingTime() {
+    if (remainingTime >= 3600) {
+        remainingTimeDisplay.textContent = parseInt(remainingTime / 3600).toString().padStart(2, '0')
+        + ":" 
+        + parseInt(remainingTime % 60).toString().padStart(2, '0') 
+        + ":" 
+        + parseInt(remainingTime % 60).toString().padStart(2, '0');
+    } else {
+        remainingTimeDisplay.textContent = parseInt(remainingTime / 3600).toString().padStart(2, '0')
+        + ":" 
+        + parseInt(remainingTime / 60).toString().padStart(2, '0') 
+        + ":" 
+        + parseInt(remainingTime % 60).toString().padStart(2, '0');
+    }    
+}
 
 
 
@@ -125,8 +140,8 @@ function prepareQuiz() {
     correctAnswers = 0;
     invalidAnswers = 0;
     isLastQuestion = false;
-    remainingTimeDisplay.textContent = remainingTime + "s";
-
+    // remainingTimeDisplay.textContent = remainingTime + "s";    
+    displayRemainingTime()
     showWelcomeScreen();
 }
 
@@ -136,11 +151,13 @@ function startQuiz() {
 
         if (remainingTime > 0) {
             remainingTime--;
-            remainingTimeDisplay.textContent = remainingTime + "s";         
+            // remainingTimeDisplay.textContent = remainingTime + "s";         
+            displayRemainingTime();
 
         } else {
             // clearInterval(trackRemainingTime);
-            remainingTimeDisplay.textContent = remainingTime + "s";         
+            // remainingTimeDisplay.textContent = remainingTime + "s";         
+            // displayRemainingTime();
             endQuiz();
         }     
     }, 1000);
@@ -296,7 +313,8 @@ function showFeedback() {
 
 function endQuiz() {
     removeAllChildren(quizContainer);
-    remainingTimeDisplay.textContent = remainingTime + "s";         
+    // remainingTimeDisplay.textContent = remainingTime + "s";         
+    displayRemainingTime();
     clearInterval(trackRemainingTime);    
     showSummaryScreen();    
 }
