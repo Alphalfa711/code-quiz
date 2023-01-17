@@ -44,7 +44,7 @@ const questionsArray = [
 
 // Defining Global variables
 var currentQuestionIndex = 0;
-const timeLimit = 7;
+const timeLimit = 360;
 var remainingTime;
 var correctAnswers = 0;
 var invalidAnswers = 0;
@@ -267,7 +267,12 @@ function submitAnswer(event) {
                     }
                 }
             } else {
-                item.setAttribute("class", "disabled");
+                if (item.textContent[0] === questionsArray[currentQuestionIndex].questionAnswer) {
+                    item.setAttribute("class", "correct disabled")
+                } else {
+                    item.setAttribute("class", "disabled");
+                }
+                
             }                
         }    
     }
