@@ -44,7 +44,7 @@ const questionsArray = [
 
 // Defining Global variables
 var currentQuestionIndex = 0;
-const timeLimit = 360;
+const questionTimeLimit = 90;
 var remainingTime;
 var correctAnswers = 0;
 var invalidAnswers = 0;
@@ -63,7 +63,10 @@ startMessage1.setAttribute("class", "center start");
 startMessage1.textContent = "Try to answer the following code-related questions within the time limit."
 var startMessage2 = document.createElement('p');
 startMessage2.setAttribute("class", "center start");
-startMessage2.textContent = "Keep in mind that incorrect answers will penalize your score/time by ten seconds!"
+startMessage2.textContent = "You will have " + questionTimeLimit + " seconds to answer each question."
+var startMessage3 = document.createElement('p');
+startMessage3.setAttribute("class", "center start");
+startMessage3.textContent = "Keep in mind that incorrect answers will penalize your score/time by ten seconds!"
 var startQuizButton = document.createElement("button");
 startQuizButton.setAttribute("class", "button start");
 startQuizButton.textContent = "Start Quiz";
@@ -135,7 +138,7 @@ function displayRemainingTime() {
 function prepareQuiz() {
     
     // Reset all variables
-    remainingTime = timeLimit;
+    remainingTime = 0;
     currentQuestionIndex = 0;
     correctAnswers = 0;
     invalidAnswers = 0;
@@ -146,7 +149,7 @@ function prepareQuiz() {
 
 
 function startQuiz() {
-
+    remainingTime = 30 * questionsArray.length
     trackRemainingTime = setInterval(function() {
 
         if (remainingTime > 0) {
@@ -167,6 +170,7 @@ function showWelcomeScreen() {
     quizContainer.appendChild(startHeader);
     quizContainer.appendChild(startMessage1);
     quizContainer.appendChild(startMessage2);
+    quizContainer.appendChild(startMessage3);
     quizContainer.appendChild(startQuizButton);    
 
     // add text field for name/initials
