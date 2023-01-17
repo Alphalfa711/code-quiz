@@ -114,6 +114,7 @@ function removeAllChildren(parent) {
     }
 }
 
+
 function displayRemainingTime() {
     if (remainingTime >= 3600) {
         remainingTimeDisplay.textContent = parseInt(remainingTime / 3600).toString().padStart(2, '0')
@@ -131,7 +132,6 @@ function displayRemainingTime() {
 }
 
 
-
 function prepareQuiz() {
     
     // Reset all variables
@@ -140,10 +140,10 @@ function prepareQuiz() {
     correctAnswers = 0;
     invalidAnswers = 0;
     isLastQuestion = false;
-    // remainingTimeDisplay.textContent = remainingTime + "s";    
     displayRemainingTime()
     showWelcomeScreen();
 }
+
 
 function startQuiz() {
 
@@ -151,13 +151,9 @@ function startQuiz() {
 
         if (remainingTime > 0) {
             remainingTime--;
-            // remainingTimeDisplay.textContent = remainingTime + "s";         
             displayRemainingTime();
 
         } else {
-            // clearInterval(trackRemainingTime);
-            // remainingTimeDisplay.textContent = remainingTime + "s";         
-            // displayRemainingTime();
             endQuiz();
         }     
     }, 1000);
@@ -174,7 +170,6 @@ function showWelcomeScreen() {
     quizContainer.appendChild(startQuizButton);    
 
     // add text field for name/initials
-
 }
 
 
@@ -183,6 +178,7 @@ function displayFirstQuestion() {
     removeAllChildren(quizContainer);
     displayQuestion();
 }
+
 
 function appendQuestionElements() {
     quizContainer.appendChild(quizQuestionNumber)
@@ -195,9 +191,8 @@ function appendQuestionElements() {
         newListItem = document.createElement('li');        
         quizUl.appendChild(newListItem);        
     }
-    
-    
 }
+
 
 function updateQuestionElements() {
     
@@ -208,26 +203,11 @@ function updateQuestionElements() {
     
     var listItems = quizUl.querySelectorAll('li');
 
-    // console.log("By tag name: ", listItems)
-    // console.log("By query selector: ", listItems)
-
-    // Does not work
-    // for (item in listItems) {        
-    //     item.textContent = "Hello"               
-    // }   
-    
-    // Does not work
-    // console.log(listItems)
-
-    // Loop runs more than 4 time even though array only has 4 elements
-    // for (i in listItems) {        
-    //     listItems[i].textContent = questionsArray[currentQuestionIndex].answers[i];               
-    // }   
     for (var i = 0; i < 4; i++) {        
         listItems[i].textContent = questionsArray[currentQuestionIndex].answers[i];               
     }   
-    // console.log("By query selector: ", listItems)
 }
+
 
 function enableListItems() {
     var listItems = quizUl.querySelectorAll('li');
@@ -235,11 +215,8 @@ function enableListItems() {
     for (var i = 0; i < 4; i++) {        
         listItems[i].setAttribute("class", "question");
     }
-    // This also works. Why ?
-    // for (item of listItems) {
-    //     item.setAttribute("class", "question");
-    // }
 }
+
 
 function displayQuestion() {    
 
@@ -258,6 +235,7 @@ function displayQuestion() {
         endQuiz();
     }
 }
+
 
 function submitAnswer(event) {
     var element = event.target;
@@ -295,6 +273,7 @@ function submitAnswer(event) {
     }
 }      
 
+
 function showFeedback() {
 
     quizContainer.appendChild(quizFeedbackContainer);       
@@ -311,9 +290,9 @@ function showFeedback() {
     
 }
 
+
 function endQuiz() {
     removeAllChildren(quizContainer);
-    // remainingTimeDisplay.textContent = remainingTime + "s";         
     displayRemainingTime();
     clearInterval(trackRemainingTime);    
     showSummaryScreen();    
@@ -334,6 +313,7 @@ function showSummaryScreen() {
     summaryScore.textContent = "Your final score is " + (finalScore * 100); 
     quizContainer.appendChild(summaryScore);    
 }
+
 
 // Event listeners
 startQuizButton.addEventListener("click", startQuiz);
