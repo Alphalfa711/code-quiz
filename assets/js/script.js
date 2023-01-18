@@ -333,11 +333,7 @@ function showSummaryScreen() {
     quizContainer.appendChild(summaryTitle);
         
     summaryScore.textContent = "Your final score is " + (finalScore * 100); 
-    quizContainer.appendChild(summaryScore);    
-    if (confirm("Start again ?")) {
-        removeAllChildren(quizContainer);
-        prepareQuiz();
-    }
+    quizContainer.appendChild(summaryScore);        
 }
 
 
