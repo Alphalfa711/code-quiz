@@ -129,7 +129,9 @@ function removeAllChildren(parent) {
     }
 }
 
-
+/**
+ * Format how time is displayed based on allowed time
+ */
 function displayRemainingTime() {
     if (remainingTime >= 3600) {
         remainingTimeDisplay.textContent = parseInt(remainingTime / 3600).toString().padStart(2, '0')
@@ -146,28 +148,33 @@ function displayRemainingTime() {
     }    
 }
 
-
+/**
+ * Reset all variables
+ * Show updated time remainig 
+ * Load welcome screen elements
+ */
 function prepareQuiz() {
-    
-    // Reset all variables
-    remainingTime = 0;
     currentQuestionIndex = 0;
     correctAnswers = 0;
     invalidAnswers = 0;
     isLastQuestion = false;
+    remainingTime = 30 * questionsArray.length
     displayRemainingTime()
     showWelcomeScreen();
 }
 
-
+/**
+ * Start the counter that will update remaining time every second
+ * Run displayFirstQuesiton function that wlll remove all elements from welcome screen
+ * and load all quesiton elements
+ */
 function startQuiz() {
-    remainingTime = 30 * questionsArray.length
+    
     trackRemainingTime = setInterval(function() {
-
         if (remainingTime > 0) {
             remainingTime--;
             displayRemainingTime();
-
+        // End quiz if time reaches zero
         } else {
             endQuiz();
         }     
@@ -189,44 +196,47 @@ function showWelcomeScreen() {
 
 /**
  * Remove all elements from welcome screen
- * Display first question if it exists
+ * Display first question
  */
 function displayFirstQuestion() {    
-    
     removeAllChildren(quizContainer);
     displayQuestion();
 }
 
-
+/**
+ * Append all question element to quiz container
+ */
 function appendQuestionElements() {
     quizContainer.appendChild(quizQuestionNumber)
     quizContainer.appendChild(quizQuestion);
     quizContainer.appendChild(quizListContainer)
     quizListContainer.appendChild(quizUl);
-
+    // Create and append as many elements as there is possible answers
     for (itemIndex in questionsArray[currentQuestionIndex].answers) {
-        
         newListItem = document.createElement('li');        
         quizUl.appendChild(newListItem);        
     }
 }
 
-
+/**
+ * Update question elements with information from next available question
+ * Reset/assign proper styling for possible answers (li elements) 
+ */
 function updateQuestionElements() {
-    
-    enableListItems();
-
     quizQuestionNumber.textContent =  "Question " + (currentQuestionIndex + 1) + "/" + questionsArray.length;
     quizQuestion.textContent = questionsArray[currentQuestionIndex].question;
     
     var listItems = quizUl.querySelectorAll('li');
-
+    
     for (var i = 0; i < 4; i++) {        
         listItems[i].textContent = questionsArray[currentQuestionIndex].answers[i];               
     }   
+    enableListItems();
 }
 
-
+/**
+ * Reset/assign proper styling for possible answers (li elements)
+ */
 function enableListItems() {
     var listItems = quizUl.querySelectorAll('li');
     
@@ -239,17 +249,16 @@ function enableListItems() {
 function displayQuestion() {    
 
     if (questionsArray[currentQuestionIndex] != undefined) {
-        
+        // Append question elements on first question
         if (currentQuestionIndex === 0){            
             appendQuestionElements();
         }
-        // Update content based on object in the array
+        // Update content based on object in the array 
         updateQuestionElements();       
     }
     else {
-        // Submitted answer for final question
+        // No more questions to display
         // Provide summary        
-        // removeAllChildren(quizContainer);
         endQuiz();
     }
 }
