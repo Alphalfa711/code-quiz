@@ -45,7 +45,7 @@ const questionsArray = [
         answers: [  
             "a. Both Compiling & Interpreting the JavaScript",
             "b. Parsing the javascript",
-            "c. Interpreting the JavaSc,ript",
+            "c. Interpreting the JavaScript",
             "d. Compiling the JavaScript",
         ],
         questionAnswer: "c"
@@ -165,8 +165,8 @@ function prepareQuiz() {
 
 /**
  * Start the counter that will update remaining time every second
- * Run displayFirstQuesiton function that wlll remove all elements from welcome screen
- * and load all quesiton elements
+ * Remove all welcome elements from welcome screen
+ * Load first quesiton elements
  */
 function startQuiz() {
     
@@ -180,7 +180,8 @@ function startQuiz() {
         }     
     }, 1000);
     
-    displayFirstQuestion();    
+    removeAllChildren(quizContainer);
+    displayQuestion();    
 }
 
 /**
@@ -194,14 +195,6 @@ function showWelcomeScreen() {
     quizContainer.appendChild(startQuizButton);    
 }
 
-/**
- * Remove all elements from welcome screen
- * Display first question
- */
-function displayFirstQuestion() {    
-    removeAllChildren(quizContainer);
-    displayQuestion();
-}
 
 /**
  * Append all question element to quiz container
@@ -247,13 +240,12 @@ function enableListItems() {
 
 
 function displayQuestion() {    
-
+    // Check to see if currentQuestionIndex is not out of range
     if (questionsArray[currentQuestionIndex] != undefined) {
         // Append question elements on first question
         if (currentQuestionIndex === 0){            
             appendQuestionElements();
-        }
-        // Update content based on object in the array 
+        } 
         updateQuestionElements();       
     }
     else {
@@ -275,14 +267,12 @@ function submitAnswer(event) {
         for (item of listItems) {        
             if (item.textContent === element.textContent) {
                 if (element.textContent[0] === questionsArray[currentQuestionIndex].questionAnswer) {
-                    // console.log("Correct answer")
                     element.setAttribute("class", "correct disabled")
-                    quizFeedback.textContent = "Correct";
+                    quizFeedback.textContent = "Correct ✔";
                     correctAnswers++;
                 } else {
-                    // console.log("Incorrect answer")
                     element.setAttribute("class", "incorrect disabled")
-                    quizFeedback.textContent = "Wrong";
+                    quizFeedback.textContent = "Wrong ✖";
                     invalidAnswers++;
                     if (remainingTime > 10) {
                         if (!isLastQuestion) {
@@ -322,8 +312,8 @@ function showFeedback() {
     
 }
 
-
 function endQuiz() {
+    removeAllChildren(quizUl)
     removeAllChildren(quizContainer);
     displayRemainingTime();
     clearInterval(trackRemainingTime);    
@@ -344,6 +334,10 @@ function showSummaryScreen() {
         
     summaryScore.textContent = "Your final score is " + (finalScore * 100); 
     quizContainer.appendChild(summaryScore);    
+    if (confirm("Start again ?")) {
+        removeAllChildren(quizContainer);
+        prepareQuiz();
+    }
 }
 
 
