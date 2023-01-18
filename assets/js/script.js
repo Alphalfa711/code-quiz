@@ -40,6 +40,16 @@ const questionsArray = [
         ],
         questionAnswer: "b"
     },    
+    {
+        question: "Why JavaScript Engine is needed?",
+        answers: [  
+            "a. Both Compiling & Interpreting the JavaScript",
+            "b. Parsing the javascript",
+            "c. Interpreting the JavaSc,ript",
+            "d. Compiling the JavaScript",
+        ],
+        questionAnswer: "c"
+    }
 ]
 
 // Defining Global variables
@@ -108,11 +118,13 @@ var nextButton = document.createElement('button');
 var remainingTimeDisplay = document.getElementById('timeLeft');
 
 
-
+/**
+ * Remove All Child Nodes
+ * Function source https://www.javascripttutorial.net/dom/manipulating/remove-all-child-nodes/
+ * @param parent  
+ */
 function removeAllChildren(parent) {
-    // console.log("Parent item: " ,parent);
     while (parent.firstChild) {
-        // console.log("First child: ", parent.firstChild);
         parent.removeChild(parent.firstChild);
     }
 }
@@ -164,19 +176,21 @@ function startQuiz() {
     displayFirstQuestion();    
 }
 
-
+/**
+ * Show all elements of the weclome screen
+ */
 function showWelcomeScreen() { 
-
     quizContainer.appendChild(startHeader);
     quizContainer.appendChild(startMessage1);
     quizContainer.appendChild(startMessage2);
     quizContainer.appendChild(startMessage3);
     quizContainer.appendChild(startQuizButton);    
-
-    // add text field for name/initials
 }
 
-
+/**
+ * Remove all elements from welcome screen
+ * Display first question if it exists
+ */
 function displayFirstQuestion() {    
     
     removeAllChildren(quizContainer);
