@@ -192,12 +192,11 @@ function prepareQuiz() {
 }
 
 /**
- * Start the counter that will update remaining time every second
- * Remove all welcome elements from welcome screen
- * Load first quesiton elements
+ * Defining timer function that will update remaining time 
+ * every second
+ * If time runs out the quiz will end
  */
-function startQuiz() {
-    
+function startTimer() {
     trackRemainingTime = setInterval(function() {
         if (remainingTime > 0) {
             remainingTime--;
@@ -207,7 +206,16 @@ function startQuiz() {
             endQuiz();
         }     
     }, 1000);
-    
+}
+
+
+/**
+ * Start the counter that will update remaining time every second
+ * Remove all welcome elements from welcome screen
+ * Load first quesiton elements
+ */
+function startQuiz() {
+    startTimer();
     removeAllChildren(quizContainer);
     displayQuestion();    
 }
