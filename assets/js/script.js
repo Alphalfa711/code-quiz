@@ -53,6 +53,7 @@ const questionsArray = [
 ]
 
 // Defining Global variables
+var highScores;
 var currentQuestionIndex = 0;
 const questionTimeLimit = 90;
 var remainingTime;
@@ -121,7 +122,7 @@ var remainingTimeDisplay = document.getElementById('timeLeft');
 /**
  * Remove All Child Nodes
  * Function source https://www.javascripttutorial.net/dom/manipulating/remove-all-child-nodes/
- * @param parent  
+ * @param parent container
  */
 function removeAllChildren(parent) {
     while (parent.firstChild) {
@@ -159,6 +160,33 @@ function prepareQuiz() {
     invalidAnswers = 0;
     isLastQuestion = false;
     remainingTime = 30 * questionsArray.length
+
+    var userScore = [
+    {
+        name: "Tony",
+        score: 90
+    },
+    {
+        name: "Jimmy",
+        score: 70
+    }]
+
+
+    var newuser = {
+        name: "Alex",
+        score: 50
+    }
+
+    userScore.push(newuser);
+    localStorage.setItem("high scores", JSON.stringify(userScore));
+    
+    highScores = JSON.parse(localStorage.getItem("high scores"))
+    // if (!highScores) {
+    //     highScores = [];
+    // }
+
+    
+
     displayRemainingTime()
     showWelcomeScreen();
 }
@@ -352,3 +380,4 @@ nextButton.addEventListener("click", function (){
 
 // Display welcome screen
 prepareQuiz()
+
