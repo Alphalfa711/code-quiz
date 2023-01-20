@@ -21,13 +21,13 @@ var bestScores = document.getElementById('scores');
 
 
 
-function showScores() {
+function showHighScores() {
     removeAllChildren(quizContainer);
-    
+    alert("Results")
     
 }
 
-bestScores.addEventListener('click', showScores);
+bestScores.addEventListener('click', showHighScores);
 
 // Timer
 var remainingTimeDisplay = document.getElementById('timeLeft');
@@ -317,7 +317,7 @@ function endQuiz() {
 
 
 function showSummaryScreen() {
-    finalScore = correctAnswers / questionsArray.length
+    finalScore = parseInt((correctAnswers / questionsArray.length) * 100)
 
     if (remainingTime > 0) {
         summaryTitle.textContent = "All done!"
@@ -327,7 +327,7 @@ function showSummaryScreen() {
 
     quizContainer.appendChild(summaryTitle);
         
-    summaryScore.textContent = "Your final score is " + (finalScore * 100); 
+    summaryScore.textContent = "Your final score is " + finalScore; 
     quizContainer.appendChild(summaryScore);    
     quizContainer.appendChild(userName);
     quizContainer.appendChild(submitScore)
@@ -338,9 +338,11 @@ function upadateHighScores(event) {
     event.preventDefault();
 
     userScore = {
-        initials: document.getElementById('initials').value,
+        initials: userName.value,
         score: finalScore
     }; 
+
+    userName.value = "";
 
     highScores.push(userScore);
     localStorage.setItem("high scores", JSON.stringify(highScores));
