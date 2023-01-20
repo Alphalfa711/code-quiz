@@ -81,7 +81,7 @@ nextButton.setAttribute('class', 'button');
 
 // Quiz summary screen elements
 var summaryTitle = document.createElement('h2');    
-var summaryScore = document.createElement('p');
+var summaryScore = document.createElement('h3');
 var userName = document.createElement('input');
 https://stackoverflow.com/questions/12274748/setting-multiple-attributes-for-an-element-at-once-with-javascript
     Object.assign(userName, {        
