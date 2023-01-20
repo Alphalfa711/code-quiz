@@ -1,5 +1,42 @@
+// VARIABLES
+
+// Defining Global variables
+var highScores;
+var userScore;
+var currentQuestionIndex = 0;
+const questionTimeLimit = 90;
+var remainingTime;
+var correctAnswers = 0;
+var invalidAnswers = 0;
+var finalScore = 0;
+var trackRemainingTime;
+var isLastQuestion = false;
+
+
 // Creating DOM Elements
 
+// HEADER
+// Best results
+var bestScores = document.getElementById('scores');
+
+
+
+function showHighScores() {
+    removeAllChildren(quizContainer);
+    alert("Results")
+    
+}
+
+bestScores.addEventListener('click', showHighScores);
+
+// Timer
+var remainingTimeDisplay = document.getElementById('timeLeft');
+
+// Quiz container 
+var quizContainer = document.getElementById('quiz-container');
+
+
+// BODY
 // Quiz welcome/start screen elements
 var startHeader = document.createElement('h2');
 startHeader.setAttribute("class", "center");
@@ -18,45 +55,48 @@ startQuizButton.setAttribute("class", "button start");
 startQuizButton.textContent = "Start Quiz";
 
 
-// Quiz summary screen elements
-var summaryTitle = document.createElement('h2');    
-var summaryScore = document.createElement('p')
-// Quiz question container
-var quizContainer = document.getElementById('quiz-container');
+// Questions elements
 // Question number
 var quizQuestionNumber = document.createElement('h4');
 // Question title
 var quizQuestion = document.createElement('h2');
 // Flex container for UL list
 var quizListContainer = document.createElement('div');
-    quizListContainer.setAttribute("id", "list-container");
+quizListContainer.setAttribute("id", "list-container");
 // UL List 
 var quizUl = document.createElement('ul');
 // List element that will be assigned questions dynamically
 var quizli = document.createElement('li')
+
+// Feedback elements
 // Display correct / wrong answer
 var quizFeedbackContainer = document.createElement('div')    
     quizFeedbackContainer.setAttribute("class", "feedback-container")
 var quizFeedback = document.createElement('div');
 quizFeedback.setAttribute('class', "feedback")
 var nextButton = document.createElement('button');
-    nextButton.setAttribute('class', 'button');
-    // nextButton.textContent = "Next question >";
-var remainingTimeDisplay = document.getElementById('timeLeft');
+nextButton.setAttribute('class', 'button');
 
 
-// VARIABLES
 
-// Defining Global variables
-var highScores;
-var currentQuestionIndex = 0;
-const questionTimeLimit = 90;
-var remainingTime;
-var correctAnswers = 0;
-var invalidAnswers = 0;
-var finalScore = 0;
-var trackRemainingTime;
-var isLastQuestion = false;
+// Quiz summary screen elements
+var summaryTitle = document.createElement('h2');    
+var summaryScore = document.createElement('p');
+var userName = document.createElement('input');
+https://stackoverflow.com/questions/12274748/setting-multiple-attributes-for-an-element-at-once-with-javascript
+    Object.assign(userName, {        
+        autocomplete: 'none',        
+        placeholder: "Your initials",
+        id: 'initials'
+    })
+    
+var submitScore = document.createElement('button');
+submitScore.innerText = "Submit";
+submitScore.setAttribute('class', 'button');
+// Object.assign(submitScore, {
+//         class: 'button',
+//         type: 'submit'
+//     })
 
 
 
@@ -101,6 +141,20 @@ function init() {
     invalidAnswers = 0;
     isLastQuestion = false;
     remainingTime = 30 * questionsArray.length
+
+    highScores = JSON.parse(localStorage.getItem('high scores'))
+    if (!highScores) {
+        highScores = [];
+    }
+
+            
+    
+        
+        
+        
+
+
+
 
     displayRemainingTime()
     showWelcomeScreen();
@@ -272,7 +326,7 @@ function endQuiz() {
 
 
 function showSummaryScreen() {
-    finalScore = correctAnswers / questionsArray.length
+    finalScore = parseInt((correctAnswers / questionsArray.length) * 100)
 
     if (remainingTime > 0) {
         summaryTitle.textContent = "All done!"
@@ -282,8 +336,26 @@ function showSummaryScreen() {
 
     quizContainer.appendChild(summaryTitle);
         
-    summaryScore.textContent = "Your final score is " + (finalScore * 100); 
-    quizContainer.appendChild(summaryScore);        
+    summaryScore.textContent = "Your final score is " + finalScore; 
+    quizContainer.appendChild(summaryScore);    
+    quizContainer.appendChild(userName);
+    quizContainer.appendChild(submitScore)
+}
+
+function upadateHighScores(event) {
+
+    //! text from input field with initials
+    event.preventDefault();
+
+    userScore = {
+        initials: userName.value,
+        score: finalScore
+    }; 
+
+    userName.value = "";
+
+    highScores.push(userScore);
+    localStorage.setItem("high scores", JSON.stringify(highScores));
 }
 
 
@@ -298,6 +370,8 @@ nextButton.addEventListener("click", function (){
     currentQuestionIndex++;
     displayQuestion();               
 });
+
+submitScore.addEventListener('click' , upadateHighScores)
 
 
 // Display welcome screen
