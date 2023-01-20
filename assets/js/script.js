@@ -154,7 +154,7 @@ function displayRemainingTime() {
  * Show updated time remainig 
  * Load welcome screen elements
  */
-function prepareQuiz() {
+function init() {
     currentQuestionIndex = 0;
     correctAnswers = 0;
     invalidAnswers = 0;
@@ -207,7 +207,6 @@ function startTimer() {
         }     
     }, 1000);
 }
-
 
 /**
  * Start the counter that will update remaining time every second
@@ -387,5 +386,5 @@ nextButton.addEventListener("click", function (){
 
 
 // Display welcome screen
-prepareQuiz()
+init()
 
