@@ -86,7 +86,7 @@ var userName = document.createElement('input');
 https://stackoverflow.com/questions/12274748/setting-multiple-attributes-for-an-element-at-once-with-javascript
     Object.assign(userName, {        
         autocomplete: 'none',        
-        placeholder: "Your initials",
+        placeholder: "Nickname",
         id: 'initials'
     })
     

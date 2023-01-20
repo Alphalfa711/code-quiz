@@ -48,6 +48,9 @@ p {
 
 input {
     color: var(--font-dark);
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    padding: 1rem;
 }
 
 #quiz-container {
@@ -70,6 +73,20 @@ ul {
     padding: 0;
     margin: 0;        
 }
+
+#time-display {
+    text-align: center;    
+}
+
+#timeLeft {
+    margin-top: .5rem;
+    padding: .5rem;
+    border: 1px solid var(--font-color);
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+}
+
 
 #quiz-container li {    
     margin-bottom: .5rem;    
