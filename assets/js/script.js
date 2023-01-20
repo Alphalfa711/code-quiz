@@ -90,6 +90,7 @@ https://stackoverflow.com/questions/12274748/setting-multiple-attributes-for-an-
         id: 'initials'
     })
     
+    
 var submitScore = document.createElement('button');
 submitScore.innerText = "Submit";
 submitScore.setAttribute('class', 'button');
@@ -340,6 +341,7 @@ function showSummaryScreen() {
     quizContainer.appendChild(summaryScore);    
     quizContainer.appendChild(userName);
     quizContainer.appendChild(submitScore)
+    userName.focus();
 }
 
 function upadateHighScores(event) {
