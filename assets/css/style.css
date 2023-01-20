@@ -1,10 +1,14 @@
 :root {
     --font-color: #585958;    
-    --body-bg-color: #f2f2f2;
-    --font-dark: #282929;
-    --wrapper-bg-color: #fff;
+    --font-dark: #2C2D2C;
+    --body-bg-color: #f2f2f2;    
     --box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
     --transition-time: .3s;   
+    --incorrect-color: #f78888;
+    --correct-color: #1fc5a8;
+    --correct-color-hover: #22D8B9;
+    --clickable-element: #ffb080;
+    --clickable-element-hover: #FFA064;
 }
 
 * {    
@@ -42,6 +46,10 @@ p {
     font-size: 1.1rem;
 }
 
+input {
+    color: var(--font-dark);
+}
+
 #quiz-container {
     width: 650px; 
     display: flex;
@@ -71,11 +79,12 @@ ul {
 }
 
 .question {
-    background-color: #ff9c60;        
+    background-color: var(--clickable-element);    
+    color: var(--font-dark);    
 }
 
 .question:hover {
-    background-color: #ffd6b8;
+    background-color: var(--clickable-element-hover);
 }
 
 #quiz-container li:hover {    
@@ -86,7 +95,7 @@ ul {
     display: flex;   
 }
 .feedback-container {
-    border-top: 1px solid black;
+    border-top: 1px solid var(--font-color);
     padding: 1rem;
     display: flex;
     justify-content: space-between;
@@ -102,18 +111,19 @@ ul {
     transition: 0.2s;
     margin-bottom: .5rem;    
     padding: .5rem;       
-    background-color: #ff9c60;   
+    background-color: var(--clickable-element);   
     font-size: 1.5rem;
     border-radius: 5px;
     border: none;    
     box-shadow: var(--box-shadow);
     cursor: pointer;    
+    color: var(--font-dark);
 }
 
 .button:hover {    
     transition: 0.2s;
     cursor: pointer;
-    background-color: #ffd6b8;
+    background-color: var(--clickable-element-hover);
 }
 
 .button:active {
@@ -123,11 +133,11 @@ ul {
 }
 
 .correct {
-    background-color: #1fc5a8;
+    background-color: var(--correct-color);
 }
 
 .incorrect {
-    background-color: #fe6d77;
+    background-color: var(--incorrect-color);
     color: white;                
 }
 
@@ -136,13 +146,13 @@ ul {
 }
 
 .button.start {    
-    background-color: #1fc5a8;
+    background-color: var(--correct-color);
     margin-top: 1rem;
     color: var(--body-bg-color);
 }
 
 .button.start:hover {
-    background-color: #2ed3b7;    
+    background-color: var(--correct-color-hover);    
     
 }
 
