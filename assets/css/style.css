@@ -62,7 +62,7 @@ input {
     width: 650px; 
     display: flex;
     flex-direction: column;     
-    padding: 1.5rem;
+    padding: 2rem;
 }
 
 .center {
