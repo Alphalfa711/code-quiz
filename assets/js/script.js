@@ -83,11 +83,20 @@ nextButton.setAttribute('class', 'button');
 var summaryTitle = document.createElement('h2');    
 var summaryScore = document.createElement('p');
 var userName = document.createElement('input');
-    userName.setAttribute('id', 'initials');
+https://stackoverflow.com/questions/12274748/setting-multiple-attributes-for-an-element-at-once-with-javascript
+    Object.assign(userName, {        
+        autocomplete: 'none',        
+        placeholder: "Your initials",
+        id: 'initials'
+    })
+    
 var submitScore = document.createElement('button');
-    submitScore.setAttribute('class', 'button');
-
-
+submitScore.innerText = "Submit";
+submitScore.setAttribute('class', 'button');
+// Object.assign(submitScore, {
+//         class: 'button',
+//         type: 'submit'
+//     })
 
 
 
@@ -334,6 +343,7 @@ function showSummaryScreen() {
 }
 
 function upadateHighScores(event) {
+
     //! text from input field with initials
     event.preventDefault();
 
