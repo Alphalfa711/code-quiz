@@ -1,15 +1,4 @@
-// Defining Global variables
-var highScores;
-var currentQuestionIndex = 0;
-const questionTimeLimit = 90;
-var remainingTime;
-var correctAnswers = 0;
-var invalidAnswers = 0;
-var finalScore = 0;
-var trackRemainingTime;
-var isLastQuestion = false;
 // Creating DOM Elements
-
 
 // Quiz welcome/start screen elements
 var startHeader = document.createElement('h2');
@@ -29,12 +18,9 @@ startQuizButton.setAttribute("class", "button start");
 startQuizButton.textContent = "Start Quiz";
 
 
-
 // Quiz summary screen elements
-var summaryTitle = document.createElement('h2');
-    
+var summaryTitle = document.createElement('h2');    
 var summaryScore = document.createElement('p')
-
 // Quiz question container
 var quizContainer = document.getElementById('quiz-container');
 // Question number
@@ -48,21 +34,30 @@ var quizListContainer = document.createElement('div');
 var quizUl = document.createElement('ul');
 // List element that will be assigned questions dynamically
 var quizli = document.createElement('li')
-
 // Display correct / wrong answer
 var quizFeedbackContainer = document.createElement('div')    
     quizFeedbackContainer.setAttribute("class", "feedback-container")
-
 var quizFeedback = document.createElement('div');
 quizFeedback.setAttribute('class', "feedback")
-
-
 var nextButton = document.createElement('button');
     nextButton.setAttribute('class', 'button');
     // nextButton.textContent = "Next question >";
-
-
 var remainingTimeDisplay = document.getElementById('timeLeft');
+
+
+// VARIABLES
+
+// Defining Global variables
+var highScores;
+var currentQuestionIndex = 0;
+const questionTimeLimit = 90;
+var remainingTime;
+var correctAnswers = 0;
+var invalidAnswers = 0;
+var finalScore = 0;
+var trackRemainingTime;
+var isLastQuestion = false;
+
 
 
 /**
@@ -106,32 +101,6 @@ function init() {
     invalidAnswers = 0;
     isLastQuestion = false;
     remainingTime = 30 * questionsArray.length
-
-    var userScore = [
-    {
-        name: "Tony",
-        score: 90
-    },
-    {
-        name: "Jimmy",
-        score: 70
-    }]
-
-
-    var newuser = {
-        name: "Alex",
-        score: 50
-    }
-
-    userScore.push(newuser);
-    localStorage.setItem("high scores", JSON.stringify(userScore));
-    
-    highScores = JSON.parse(localStorage.getItem("high scores"))
-    // if (!highScores) {
-    //     highScores = [];
-    // }
-
-    
 
     displayRemainingTime()
     showWelcomeScreen();
