@@ -30,26 +30,26 @@ const questionsArray = [
         ],
         questionAnswer: "d"
     },
-    // {
-    //     question: "How do we write comment in javascript?",
-    //     answers: [
-    //         "a. /* */",
-    //         "b. //",
-    //         "c. #",
-    //         "d. $$"
-    //     ],
-    //     questionAnswer: "b"
-    // },    
-    // {
-    //     question: "Why JavaScript Engine is needed?",
-    //     answers: [  
-    //         "a. Both Compiling & Interpreting the JavaScript",
-    //         "b. Parsing the javascript",
-    //         "c. Interpreting the JavaScript",
-    //         "d. Compiling the JavaScript",
-    //     ],
-    //     questionAnswer: "c"
-    // }
+    {
+        question: "How do we write comment in javascript?",
+        answers: [
+            "a. /* */",
+            "b. //",
+            "c. #",
+            "d. $$"
+        ],
+        questionAnswer: "b"
+    },    
+    {
+        question: "Why JavaScript Engine is needed?",
+        answers: [  
+            "a. Both Compiling & Interpreting the JavaScript",
+            "b. Parsing the javascript",
+            "c. Interpreting the JavaScript",
+            "d. Compiling the JavaScript",
+        ],
+        questionAnswer: "c"
+    }
 ]
 
 
