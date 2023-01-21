@@ -7,7 +7,6 @@ var currentQuestionIndex = 0;
 const questionTimeLimit = 90;
 var remainingTime;
 var correctAnswers = 0;
-var invalidAnswers = 0;
 var finalScore = 0;
 var trackRemainingTime;
 var isLastQuestion = false;
@@ -16,15 +15,20 @@ var isLastQuestion = false;
 // Creating DOM Elements
 
 // HEADER
-// Best results
+// High scores
 var bestScores = document.getElementById('scores');
 
 
 
-function showHighScores() {
+function showBestScores() {
+    bestScores.setAttribute("class", "button")
     removeAllChildren(quizContainer);
     alert("Results")
     
+}
+
+function appendHighScoresElements() {
+
 }
 
 
@@ -140,11 +144,10 @@ function displayRemainingTime() {
 function init() {
     currentQuestionIndex = 0;
     correctAnswers = 0;
-    invalidAnswers = 0;
     isLastQuestion = false;
-    remainingTime = 30 * questionsArray.length
+    remainingTime = questionTimeLimit * questionsArray.length;
 
-    highScores = JSON.parse(localStorage.getItem('high scores'))
+    highScores = JSON.parse(localStorage.getItem('high scores'));
 
     
     if (!highScores) {
@@ -178,6 +181,7 @@ function startTimer() {
  * Load first quesiton elements
  */
 function startQuiz() {
+    bestScores.setAttribute("class", "button disabled")
     startTimer();
     removeAllChildren(quizContainer);
     displayQuestion();    
@@ -272,7 +276,6 @@ function submitAnswer(event) {
                 } else {
                     element.setAttribute("class", "incorrect disabled")
                     quizFeedback.textContent = "Wrong ✖";
-                    invalidAnswers++;
                     if (remainingTime > 10) {
                         if (!isLastQuestion) {
                             remainingTime-=10;
@@ -311,7 +314,7 @@ function showFeedback() {
     
 }
 
-function endQuiz() {
+function endQuiz() {    
     removeAllChildren(quizUl)
     removeAllChildren(quizContainer);
     displayRemainingTime();
@@ -369,12 +372,12 @@ function upadateHighScores(event) {
     
 
     // TODO: remove init function
-    showHighScores();
+    showBestScores();
 }
 
 
 // Event listeners
-bestScores.addEventListener('click', showHighScores);
+bestScores.addEventListener('click', showBestScores);
 
 startQuizButton.addEventListener("click", startQuiz);
 
