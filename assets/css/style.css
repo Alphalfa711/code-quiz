@@ -78,9 +78,8 @@ ul {
 
 #timeLeft {
     padding: .5rem;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: var(--box-shadow);    
+    border: 1px solid #585958;
+    border-radius: 5px;    
 }
 
 #quiz-container {
