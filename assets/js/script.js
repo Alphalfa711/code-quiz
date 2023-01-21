@@ -27,7 +27,7 @@ function showHighScores() {
     
 }
 
-bestScores.addEventListener('click', showHighScores);
+
 
 // Timer
 var remainingTimeDisplay = document.getElementById('timeLeft');
@@ -84,7 +84,6 @@ var summaryTitle = document.createElement('h2');
 var summaryScore = document.createElement('h3');
 var userName = document.createElement('input');
 https://stackoverflow.com/questions/12274748/setting-multiple-attributes-for-an-element-at-once-with-javascript
-//! works on input element
     Object.assign(userName, {        
         autocomplete: 'none',        
         placeholder: "Nickname",
@@ -94,14 +93,7 @@ https://stackoverflow.com/questions/12274748/setting-multiple-attributes-for-an-
     
 var submitScore = document.createElement('button');
 submitScore.innerText = "Submit";
-// submitScore.setAttribute('class', 'button');
-// submitScore.setAttribute('id', 'button');
-//! why this does not work for button ?
-Object.assign(submitScore, {
-        class: 'button',
-        type: 'submit'
-    })
-
+submitScore.setAttribute('class', 'button');
 
 
 /**
@@ -153,30 +145,11 @@ function init() {
     remainingTime = 30 * questionsArray.length
 
     highScores = JSON.parse(localStorage.getItem('high scores'))
-    console.log("🚀 ~ file: script.js:149 ~ init ~ highScores", highScores)
 
     
     if (!highScores) {
         highScores = [];
     }
-
-            
-    var sortedScores = highScores.sort((a, b) => {
-        if (a.score === b.score) {
-            return 0;    
-        } else if (a.score > b.score) {
-            return -1
-        } else {
-            return 1
-        };
-    })
-        console.log("🚀 ~ file: script.js:160 ~ sortedScores ~ sortedScores", sortedScores)
-        
-        
-        
-
-
-
 
     displayRemainingTime()
     showWelcomeScreen();
@@ -375,15 +348,34 @@ function upadateHighScores(event) {
     }; 
 
     highScores.push(userScore);
-    localStorage.setItem("high scores", JSON.stringify(highScores));
+
+
+
+    var sortedScores = highScores.sort((a, b) => {
+        if (a.score === b.score) {
+            return 0;    
+        } else if (a.score > b.score) {
+            return -1
+        } else {
+            return 1
+        };
+    })
+
+
+    localStorage.setItem("high scores", JSON.stringify(sortedScores));
     
-    // TODO: remove all elements and display best scores
-    //? remove this
+    // TODO: display best scores
     userName.value = "";
+    
+
+    // TODO: remove init function
+    showHighScores();
 }
 
 
 // Event listeners
+bestScores.addEventListener('click', showHighScores);
+
 startQuizButton.addEventListener("click", startQuiz);
 
 quizUl.addEventListener("click", submitAnswer);

@@ -29,7 +29,6 @@ header {
 main {
     display: flex;
     justify-content: center;
-    /* padding-top: 10vh; */
     padding-top: 3rem;
 }
 
@@ -96,17 +95,19 @@ ul {
 #quiz-container li {    
     margin-bottom: .5rem;    
     padding: .5rem;    
-    
     border-radius: 5px;
 }
 
 .question {
     background-color: var(--clickable-element);    
-    color: var(--font-dark);    
+    color: var(--font-dark);   
+    transition: var(--transition-time); 
 }
 
 .question:hover {
     background-color: var(--clickable-element-hover);
+    transform: translate(5px,0);
+    transition: var(--transition-time); 
 }
 
 #quiz-container li:hover {    
@@ -160,17 +161,16 @@ ul {
 
 .incorrect {
     background-color: var(--incorrect-color);
-    color: white;                
 }
 
 .disabled {    
-    pointer-events: none;    
+    pointer-events: none;   
+    color: var(--font-dark);
 }
 
 .button.start {    
     background-color: var(--correct-color);
     margin-top: 1rem;
-    /* color: var(--body-bg-color); */
     color: var(--font-dark);
 }
 
