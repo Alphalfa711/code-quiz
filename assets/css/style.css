@@ -76,14 +76,8 @@ ul {
     padding: .5rem;
 }
 
-#time-display {
-    text-align: center;    
-}
-
 #timeLeft {
-    /* margin-top: .5rem; */
     padding: .5rem;
-    border: 1px solid var(--font-color);
     border-radius: 5px;
     background-color: #fff;
     box-shadow: var(--box-shadow);    
@@ -136,7 +130,6 @@ ul {
 
 .button {
     transition: 0.2s;
-    margin-bottom: .5rem;    
     padding: .5rem;       
     background-color: var(--clickable-element);   
     font-size: 1.5rem;
