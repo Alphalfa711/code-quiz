@@ -9,21 +9,22 @@
     <title>Code quiz</title>
 </head>
 <body>
+    <!-- Header with static elements -->
     <header>
-        <div id="scores">Best scores</div>
-        <!-- <div class="counter">Time remaining: <span id=timeLeft></span></div> -->
-        <div id="time-display">
-            <div class="counter">Time remaining</div>        
-            <div id=timeLeft></div>
-        </div>
+        <div id="scores" class="button">Best scores</div>
+        <div id=timeLeft></div>
     </header>
-        
     <main>
+        <!-- Quiz container will append / remove children dynamically -->
         <div id="quiz-container">            
 
         </div>        
     </main>
+    <!-- Script with questions array -->
     <script src="./assets/js/questions.js"></script>
+    <!-- Script with global variables and site setup -->
+    <script src="./assets/js/variables.js"></script>
+    <!-- Main js file -->
     <script src="./assets/js/script.js"></script>
 </body>
 </html>

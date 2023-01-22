@@ -13,6 +13,7 @@
 
 * {    
     color: var(--font-color);
+    box-sizing: border-box;
 }
 
 body {
@@ -29,7 +30,6 @@ header {
 main {
     display: flex;
     justify-content: center;
-    /* padding-top: 10vh; */
     padding-top: 3rem;
 }
 
@@ -40,6 +40,7 @@ h2 {
 
 h3 {
     font-size: 2rem;
+    margin-bottom: 1rem;
 }
 
 h4 {
@@ -53,16 +54,9 @@ p {
 
 input {
     color: var(--font-dark);
-    margin: 1rem 0;
+    margin-bottom: 1rem;
     font-size: 1.5rem;
     padding: .5rem;
-}
-
-#quiz-container {
-    width: 650px; 
-    display: flex;
-    flex-direction: column;     
-    padding: 2rem;
 }
 
 .center {
@@ -79,41 +73,46 @@ ul {
     margin: 0;        
 }
 
-#time-display {
-    text-align: center;    
+#counter {
+    padding: .5rem;
 }
 
 #timeLeft {
-    margin-top: .5rem;
     padding: .5rem;
-    border: 1px solid var(--font-color);
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: var(--box-shadow);    
+    border: 1px solid #585958;
+    border-radius: 5px;    
 }
 
+#quiz-container {
+    width: 650px; 
+    display: flex;
+    flex-direction: column;     
+    padding: 2rem;
+}
 
 #quiz-container li {    
     margin-bottom: .5rem;    
     padding: .5rem;    
-    
     border-radius: 5px;
 }
 
 .question {
     background-color: var(--clickable-element);    
-    color: var(--font-dark);    
+    color: var(--font-dark);   
+    transition: var(--transition-time); 
 }
 
 .question:hover {
     background-color: var(--clickable-element-hover);
+    transform: translate(5px,0);
+    transition: var(--transition-time); 
 }
 
 #quiz-container li:hover {    
     cursor: pointer;
 }
 
-#list-container {
+.list-container {
     display: flex;   
 }
 .feedback-container {
@@ -131,7 +130,6 @@ ul {
 
 .button {
     transition: 0.2s;
-    margin-bottom: .5rem;    
     padding: .5rem;       
     background-color: var(--clickable-element);   
     font-size: 1.5rem;
@@ -160,23 +158,37 @@ ul {
 
 .incorrect {
     background-color: var(--incorrect-color);
-    color: white;                
 }
 
 .disabled {    
-    pointer-events: none;    
+    pointer-events: none;   
+    color: var(--font-dark);
 }
 
 .button.start {    
     background-color: var(--correct-color);
     margin-top: 1rem;
-    /* color: var(--body-bg-color); */
     color: var(--font-dark);
 }
 
 .button.start:hover {
     background-color: var(--correct-color-hover);    
     
+}
+
+.button.disabled {
+    background-color: var(--body-bg-color);
+}
+
+.button.scores {
+    margin-right: 1rem;
+    margin-top: 1rem;
+
+}
+
+.result-item {
+    padding: .5rem;
+    font-size: 1.2rem;
 }
 
 @media screen and (max-width: 500px) {  
