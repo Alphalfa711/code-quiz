@@ -40,6 +40,7 @@ h2 {
 
 h3 {
     font-size: 2rem;
+    margin-bottom: 1rem;
 }
 
 h4 {
@@ -53,7 +54,7 @@ p {
 
 input {
     color: var(--font-dark);
-    margin: 1rem 0;
+    margin-bottom: 1rem;
     font-size: 1.5rem;
     padding: .5rem;
 }
@@ -111,7 +112,7 @@ ul {
     cursor: pointer;
 }
 
-#list-container {
+.list-container {
     display: flex;   
 }
 .feedback-container {
@@ -177,6 +178,17 @@ ul {
 
 .button.disabled {
     background-color: var(--body-bg-color);
+}
+
+.button.scores {
+    margin-right: 1rem;
+    margin-top: 1rem;
+
+}
+
+.result-item {
+    padding: .5rem;
+    font-size: 1.2rem;
 }
 
 @media screen and (max-width: 500px) {  

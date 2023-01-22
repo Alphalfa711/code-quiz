@@ -13,12 +13,22 @@ function removeAllChildren(parent) {
 function showBestScores() {
     removeAllChildren(quizContainer);
     bestScores.setAttribute("class", "button")
-    alert("Results")
-    
+    appendHighScoresElements();
 }
 
 function appendHighScoresElements() {
-
+    quizContainer.appendChild(bestScoresTitle);
+    
+    for (var i = 0; i < highScores.length; i++) {
+        var bestScoreItem = document.createElement('div')
+            bestScoreItem.textContent = (i + 1) + ". " + highScores[i].initials + " - " + highScores[i].score;
+            bestScoreItem.setAttribute('class', 'result-item');
+            quizContainer.appendChild(bestScoreItem);
+    }
+    
+    quizContainer.appendChild(bestScoresButtonContainer);
+    bestScoresButtonContainer.appendChild(bestScoresGoBack);
+    bestScoresButtonContainer.appendChild(bestScoresClear);  
 }
 
 
@@ -87,7 +97,7 @@ function startTimer() {
  */
 function startQuiz() {
     bestScores.setAttribute("class", "button disabled")
-    // startTimer();
+    startTimer();
     removeAllChildren(quizContainer);
     displayQuestion();    
 }
@@ -218,9 +228,8 @@ function showSummaryScreen() {
     userName.focus();
 }
 
-function upadateHighScores(event) {
+function upadateHighScores() {
     
-    event.preventDefault();
 
     userScore = {
         initials: userName.value,
@@ -245,8 +254,6 @@ function upadateHighScores(event) {
     localStorage.setItem("high scores", JSON.stringify(sortedScores));
     
     userName.value = "";
-    
-    // TODO: display best scores
     showBestScores();
 }
 
@@ -267,6 +274,19 @@ feedbackButton.addEventListener("click", function (){
 
 submitScore.addEventListener('click' , upadateHighScores)
 
+
+bestScoresClear.addEventListener('click', () => {
+    // Reset local storage  
+    localStorage.removeItem("high scores");
+    highScores = [];
+    // Show updated content
+    showBestScores();
+})
+
+bestScoresGoBack.addEventListener('click', () => {
+    removeAllChildren(quizContainer);
+    init();
+})
 
 // Display welcome screen
 init()

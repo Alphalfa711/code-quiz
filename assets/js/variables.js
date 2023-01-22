@@ -49,7 +49,7 @@ var quizQuestionNumber = document.createElement('h4');
 var quizQuestion = document.createElement('h2');
 // Flex container for UL list
 var quizListContainer = document.createElement('div');
-    quizListContainer.setAttribute("id", "list-container");
+    quizListContainer.setAttribute("class", "list-container");
 // UL List 
 var quizUl = document.createElement('ul');
 
@@ -83,4 +83,17 @@ var submitScore = document.createElement('button');
 
 
 // Best Results Elements
+// Title
+var bestScoresTitle = document.createElement('h3');    
+    bestScoresTitle.textContent = "Best Scores";
+var bestScoresButtonContainer = document.createElement('div');
+    bestScoresButtonContainer.setAttribute('class', 'list-container')
 
+    // Buttons
+var bestScoresGoBack = document.createElement('button')
+    bestScoresGoBack.setAttribute('class', 'button scores');
+    
+    bestScoresGoBack.textContent = "Go back";
+var bestScoresClear = document.createElement('button');
+    bestScoresClear.setAttribute('class', 'button scores');
+    bestScoresClear.textContent = "Clear scores";
