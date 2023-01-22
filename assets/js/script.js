@@ -182,7 +182,7 @@ function startTimer() {
  */
 function startQuiz() {
     bestScores.setAttribute("class", "button disabled")
-    startTimer();
+    // startTimer();
     removeAllChildren(quizContainer);
     displayQuestion();    
 }
@@ -220,26 +220,28 @@ function appendQuestionElements() {
  */
 function updateQuestionElements() {
     quizQuestionNumber.textContent =  "Question " + (currentQuestionIndex + 1) + "/" + questionsArray.length;
+    
     quizQuestion.textContent = questionsArray[currentQuestionIndex].question;
     
     var listItems = quizUl.querySelectorAll('li');
     
     for (var i = 0; i < 4; i++) {        
         listItems[i].textContent = questionsArray[currentQuestionIndex].answers[i];               
+        listItems[i].setAttribute("class", "question");
     }   
-    enableListItems();
+    // enableListItems();
 }
 
 /**
  * Reset/assign proper styling for possible answers (li elements)
  */
-function enableListItems() {
-    var listItems = quizUl.querySelectorAll('li');
+// function enableListItems() {
+//     var listItems = quizUl.querySelectorAll('li');
     
-    for (var i = 0; i < 4; i++) {        
-        listItems[i].setAttribute("class", "question");
-    }
-}
+//     for (var i = 0; i < 4; i++) {        
+//         listItems[i].setAttribute("class", "question");
+//     }
+// }
 
 
 function displayQuestion() {    
@@ -263,19 +265,20 @@ function submitAnswer(event) {
     var element = event.target;
     if (element.matches('li')) {
         
-        showFeedback()
         
         var listItems = quizUl.querySelectorAll('li');
-
+        
         for (item of listItems) {        
             if (item.textContent === element.textContent) {
                 if (element.textContent[0] === questionsArray[currentQuestionIndex].questionAnswer) {
                     element.setAttribute("class", "correct disabled")
-                    quizFeedback.textContent = "Correct ✔";
+                    // quizFeedback.textContent = "Correct ✔";                    
+                    showFeedback(true)
                     correctAnswers++;
                 } else {
                     element.setAttribute("class", "incorrect disabled")
-                    quizFeedback.textContent = "Wrong ✖";
+                    showFeedback(false)
+                    // quizFeedback.textContent = "Wrong ✖";
                     if (remainingTime > 10) {
                         if (!isLastQuestion) {
                             remainingTime-=10;
@@ -298,11 +301,18 @@ function submitAnswer(event) {
 }      
 
 
-function showFeedback() {
+function showFeedback(answer) {
 
-    quizContainer.appendChild(quizFeedbackContainer);       
+    quizContainer.appendChild(quizFeedbackContainer); 
+
+    if (answer) {
+        quizFeedback.textContent = "Correct ✔";
+    } else {
+        quizFeedback.textContent = "Wrong ✖";
+    }
     quizFeedbackContainer.appendChild(quizFeedback);
-    quizFeedbackContainer.appendChild(nextButton);
+    
+    
     
     if (questionsArray[currentQuestionIndex + 1] == undefined) {
         isLastQuestion = true;
@@ -311,12 +321,13 @@ function showFeedback() {
     } else {
         nextButton.textContent = "Next question >";
     }
-    
+    quizFeedbackContainer.appendChild(nextButton);
 }
 
 function endQuiz() {    
-    removeAllChildren(quizUl)
-    removeAllChildren(quizContainer);
+    // removeAllChildren(quizUl)
+    // removeAllChildren(quizContainer);
+    quizContainer.innerHTML = "";
     displayRemainingTime();
     clearInterval(trackRemainingTime);    
     showSummaryScreen();    
