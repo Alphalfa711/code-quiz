@@ -1,28 +1,18 @@
-// VARIABLES
-
-// Defining Global variables
-var highScores;
-var userScore;
-var currentQuestionIndex = 0;
-const questionTimeLimit = 90;
-var remainingTime;
-var correctAnswers = 0;
-var finalScore = 0;
-var trackRemainingTime;
-var isLastQuestion = false;
 
 
-// Creating DOM Elements
 
-// HEADER
-// High scores
-var bestScores = document.getElementById('scores');
-
+/**
+ * Remove All Child Nodes
+ * @param parent container
+ */
+function removeAllChildren(parent) {
+    parent.innerHTML = ""
+}
 
 
 function showBestScores() {
-    bestScores.setAttribute("class", "button")
     removeAllChildren(quizContainer);
+    bestScores.setAttribute("class", "button")
     alert("Results")
     
 }
@@ -30,91 +20,6 @@ function showBestScores() {
 function appendHighScoresElements() {
 
 }
-
-
-
-// Timer
-var remainingTimeDisplay = document.getElementById('timeLeft');
-
-// Quiz container 
-var quizContainer = document.getElementById('quiz-container');
-
-
-// BODY
-// Quiz welcome/start screen elements
-var startHeader = document.createElement('h2');
-startHeader.setAttribute("class", "center");
-startHeader.textContent = "Coding Quiz Challenge";
-var startMessage1 = document.createElement('p');
-startMessage1.setAttribute("class", "center start");
-startMessage1.textContent = "Try to answer the following code-related questions within the time limit."
-var startMessage2 = document.createElement('p');
-startMessage2.setAttribute("class", "center start");
-startMessage2.textContent = "You will have " + questionTimeLimit + " seconds to answer each question."
-var startMessage3 = document.createElement('p');
-startMessage3.setAttribute("class", "center start");
-startMessage3.textContent = "Keep in mind that incorrect answers will penalize your score/time by ten seconds!"
-var startQuizButton = document.createElement("button");
-startQuizButton.setAttribute("class", "button start");
-startQuizButton.textContent = "Start Quiz";
-
-
-// Questions elements
-// Question number
-var quizQuestionNumber = document.createElement('h4');
-// Question title
-var quizQuestion = document.createElement('h2');
-// Flex container for UL list
-var quizListContainer = document.createElement('div');
-quizListContainer.setAttribute("id", "list-container");
-// UL List 
-var quizUl = document.createElement('ul');
-// List element that will be assigned questions dynamically
-var quizli = document.createElement('li')
-
-// Feedback elements
-// Display correct / wrong answer
-var quizFeedbackContainer = document.createElement('div')    
-    quizFeedbackContainer.setAttribute("class", "feedback-container")
-var quizFeedback = document.createElement('div');
-quizFeedback.setAttribute('class', "feedback")
-var nextButton = document.createElement('button');
-nextButton.setAttribute('class', 'button');
-
-
-
-// Quiz summary screen elements
-var summaryTitle = document.createElement('h2');    
-var summaryScore = document.createElement('h3');
-var userName = document.createElement('input');
-https://stackoverflow.com/questions/12274748/setting-multiple-attributes-for-an-element-at-once-with-javascript
-    Object.assign(userName, {        
-        autocomplete: 'none',        
-        placeholder: "Nickname",
-        id: 'initials'
-    })
-    
-    
-var submitScore = document.createElement('button');
-submitScore.innerText = "Submit";
-submitScore.setAttribute('class', 'button');
-
-
-/**
- * Remove All Child Nodes
- * Function source https://www.javascripttutorial.net/dom/manipulating/remove-all-child-nodes/
- * @param parent container
- */
-function removeAllChildren(parent) {
-    
-    // parent.innerHTML = ""
-    
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
-}
-
-//! quizContainer.innerHTML = ""
 
 
 /**
@@ -199,59 +104,25 @@ function showWelcomeScreen() {
 }
 
 
-/**
- * Append all question element to quiz container
- */
-function appendQuestionElements() {
-    quizContainer.appendChild(quizQuestionNumber)
-    quizContainer.appendChild(quizQuestion);
-    quizContainer.appendChild(quizListContainer)
-    quizListContainer.appendChild(quizUl);
-    // Create and append as many elements as there is possible answers
-    for (itemIndex in questionsArray[currentQuestionIndex].answers) {
-        newListItem = document.createElement('li');        
-        quizUl.appendChild(newListItem);        
-    }
-}
-
-/**
- * Update question elements with information from next available question
- * Reset/assign proper styling for possible answers (li elements) 
- */
-function updateQuestionElements() {
-    quizQuestionNumber.textContent =  "Question " + (currentQuestionIndex + 1) + "/" + questionsArray.length;
-    
-    quizQuestion.textContent = questionsArray[currentQuestionIndex].question;
-    
-    var listItems = quizUl.querySelectorAll('li');
-    
-    for (var i = 0; i < 4; i++) {        
-        listItems[i].textContent = questionsArray[currentQuestionIndex].answers[i];               
-        listItems[i].setAttribute("class", "question");
-    }   
-    // enableListItems();
-}
-
-/**
- * Reset/assign proper styling for possible answers (li elements)
- */
-// function enableListItems() {
-//     var listItems = quizUl.querySelectorAll('li');
-    
-//     for (var i = 0; i < 4; i++) {        
-//         listItems[i].setAttribute("class", "question");
-//     }
-// }
-
-
 function displayQuestion() {    
     // Check to see if currentQuestionIndex is not out of range
     if (questionsArray[currentQuestionIndex] != undefined) {
         // Append question elements on first question
-        if (currentQuestionIndex === 0){            
-            appendQuestionElements();
-        } 
-        updateQuestionElements();       
+        quizQuestionNumber.textContent =  "Question " + (currentQuestionIndex + 1) + "/" + questionsArray.length;
+        quizContainer.appendChild(quizQuestionNumber)
+    
+        quizQuestion.textContent = questionsArray[currentQuestionIndex].question;
+        quizContainer.appendChild(quizQuestion);
+    
+        // Create and append as many elements as there is possible answers
+        for (i in questionsArray[currentQuestionIndex].answers) {
+            newListItem = document.createElement('li');        
+            newListItem.textContent = questionsArray[currentQuestionIndex].answers[i];               
+            newListItem.setAttribute("class", "question");      
+            quizUl.appendChild(newListItem);        
+        }
+        quizListContainer.appendChild(quizUl);
+        quizContainer.appendChild(quizListContainer)
     }
     else {
         // No more questions to display
@@ -294,7 +165,6 @@ function submitAnswer(event) {
                 } else {
                     item.setAttribute("class", "disabled");
                 }
-                
             }                
         }    
     }
@@ -302,31 +172,27 @@ function submitAnswer(event) {
 
 
 function showFeedback(answer) {
-
-    quizContainer.appendChild(quizFeedbackContainer); 
-
+    
     if (answer) {
         quizFeedback.textContent = "Correct ✔";
     } else {
         quizFeedback.textContent = "Wrong ✖";
     }
-    quizFeedbackContainer.appendChild(quizFeedback);
-    
-    
+    quizFeedbackContainer.appendChild(quizFeedback);   
     
     if (questionsArray[currentQuestionIndex + 1] == undefined) {
         isLastQuestion = true;
-        nextButton.textContent = "Check Score";           
+        feedbackButton.textContent = "Check Score";           
         clearInterval(trackRemainingTime);
     } else {
-        nextButton.textContent = "Next question >";
+        feedbackButton.textContent = "Next question >";
     }
-    quizFeedbackContainer.appendChild(nextButton);
+    quizFeedbackContainer.appendChild(feedbackButton);
+
+    quizContainer.appendChild(quizFeedbackContainer); 
 }
 
 function endQuiz() {    
-    // removeAllChildren(quizUl)
-    // removeAllChildren(quizContainer);
     quizContainer.innerHTML = "";
     displayRemainingTime();
     clearInterval(trackRemainingTime);    
@@ -378,11 +244,9 @@ function upadateHighScores(event) {
 
     localStorage.setItem("high scores", JSON.stringify(sortedScores));
     
-    // TODO: display best scores
     userName.value = "";
     
-
-    // TODO: remove init function
+    // TODO: display best scores
     showBestScores();
 }
 
@@ -394,9 +258,9 @@ startQuizButton.addEventListener("click", startQuiz);
 
 quizUl.addEventListener("click", submitAnswer);
 
-nextButton.addEventListener("click", function (){
-    removeAllChildren(quizFeedbackContainer);
-    quizContainer.removeChild(quizFeedbackContainer);             
+feedbackButton.addEventListener("click", function (){
+    removeAllChildren(quizUl)
+    removeAllChildren(quizContainer);
     currentQuestionIndex++;
     displayQuestion();               
 });
