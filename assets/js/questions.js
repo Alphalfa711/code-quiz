@@ -10,46 +10,46 @@ const questionsArray = [
         ],
         questionAnswer: "a"        
     },
-    {
-        question: "Which of the following is correct about JavaScript?",
-        answers: [
-            "a. JavaScript is an Object-Based language",
-            "b. JavaScript is Assembly-language",
-            "c. JavaScript is an Object-Oriented language",
-            "d. JavaScript is a High-level language"
-        ],
-        questionAnswer: "a"
-    },    
-    {
-        question: "Which of the following are not server-side Javascript objects?",
-        answers: [
-            "a. Date",
-            "b. FileUpload",
-            "c. Function",
-            "d. All of the above"
-        ],
-        questionAnswer: "d"
-    },
-    {
-        question: "How do we write comment in javascript?",
-        answers: [
-            "a. /* */",
-            "b. //",
-            "c. #",
-            "d. $$"
-        ],
-        questionAnswer: "b"
-    },    
-    {
-        question: "Why JavaScript Engine is needed?",
-        answers: [  
-            "a. Both Compiling & Interpreting the JavaScript",
-            "b. Parsing the javascript",
-            "c. Interpreting the JavaScript",
-            "d. Compiling the JavaScript",
-        ],
-        questionAnswer: "c"
-    }
+    // {
+    //     question: "Which of the following is correct about JavaScript?",
+    //     answers: [
+    //         "a. JavaScript is an Object-Based language",
+    //         "b. JavaScript is Assembly-language",
+    //         "c. JavaScript is an Object-Oriented language",
+    //         "d. JavaScript is a High-level language"
+    //     ],
+    //     questionAnswer: "a"
+    // },    
+    // {
+    //     question: "Which of the following are not server-side Javascript objects?",
+    //     answers: [
+    //         "a. Date",
+    //         "b. FileUpload",
+    //         "c. Function",
+    //         "d. All of the above"
+    //     ],
+    //     questionAnswer: "d"
+    // },
+    // {
+    //     question: "How do we write comment in javascript?",
+    //     answers: [
+    //         "a. /* */",
+    //         "b. //",
+    //         "c. #",
+    //         "d. $$"
+    //     ],
+    //     questionAnswer: "b"
+    // },    
+    // {
+    //     question: "Why JavaScript Engine is needed?",
+    //     answers: [  
+    //         "a. Both Compiling & Interpreting the JavaScript",
+    //         "b. Parsing the javascript",
+    //         "c. Interpreting the JavaScript",
+    //         "d. Compiling the JavaScript",
+    //     ],
+    //     questionAnswer: "c"
+    // }
 ]
 
 

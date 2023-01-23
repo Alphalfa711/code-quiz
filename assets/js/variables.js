@@ -74,6 +74,7 @@ var userName = document.createElement('input');
     Object.assign(userName, {        
         autocomplete: 'none',        
         placeholder: "Nickname",
+        required: true, 
         id: 'initials'
     })
 // Show submit score button
