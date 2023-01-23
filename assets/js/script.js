@@ -230,31 +230,36 @@ function showSummaryScreen() {
 
 function upadateHighScores() {
     
+    // If user entered initials
+    if (userName.value.trim()) {
+        userScore = {
+            initials: userName.value,
+            score: finalScore
+        }; 
 
-    userScore = {
-        initials: userName.value,
-        score: finalScore
-    }; 
-
-    highScores.push(userScore);
-
-
-
-    var sortedScores = highScores.sort((a, b) => {
-        if (a.score === b.score) {
-            return 0;    
-        } else if (a.score > b.score) {
-            return -1
-        } else {
-            return 1
-        };
-    })
+        highScores.push(userScore);
 
 
-    localStorage.setItem("high scores", JSON.stringify(sortedScores));
-    
-    userName.value = "";
-    showBestScores();
+
+        var sortedScores = highScores.sort((a, b) => {
+            if (a.score === b.score) {
+                return 0;    
+            } else if (a.score > b.score) {
+                return -1
+            } else {
+                return 1
+            };
+        })
+
+        localStorage.setItem("high scores", JSON.stringify(sortedScores));
+        
+        userName.value = "";
+        showBestScores();
+    } else {
+        // If user did not enter initials
+        alert("Please enter your initials.")
+    }
+
 }
 
 
