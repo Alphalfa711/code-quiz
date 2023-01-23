@@ -1,8 +1,0 @@
-- Add text field in summary screen for initials
-- Add submit button in summary screen 
-- Add array to store users initials his/her test score
-- Implement local storage for saving high scores 
-
-
-- create screen that will display high scores
-- update div class scores to a link that will show high scores screen
