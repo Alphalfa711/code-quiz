@@ -53,6 +53,7 @@ var quizListContainer = document.createElement('div');
 // UL List 
 var quizUl = document.createElement('ul');
 
+
 // Feedback elements
 // Display correct / incorrect answer
 var quizFeedbackContainer = document.createElement('div')    
@@ -73,8 +74,7 @@ var userName = document.createElement('input');
     https://stackoverflow.com/questions/12274748/setting-multiple-attributes-for-an-element-at-once-with-javascript
     Object.assign(userName, {        
         autocomplete: 'none',        
-        placeholder: "Nickname",
-        required: true, 
+        placeholder: "Initials",
         id: 'initials'
     })
 // Show submit score button
@@ -90,11 +90,12 @@ var bestScoresTitle = document.createElement('h3');
 var bestScoresButtonContainer = document.createElement('div');
     bestScoresButtonContainer.setAttribute('class', 'list-container')
 
-    // Buttons
+// Buttons
+// Go back button
 var bestScoresGoBack = document.createElement('button')
-    bestScoresGoBack.setAttribute('class', 'button scores');
-    
+    bestScoresGoBack.setAttribute('class', 'button scores');    
     bestScoresGoBack.textContent = "Go back";
+// Clear Best Scores button
 var bestScoresClear = document.createElement('button');
     bestScoresClear.setAttribute('class', 'button scores');
     bestScoresClear.textContent = "Clear scores";

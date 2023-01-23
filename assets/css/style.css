@@ -59,6 +59,12 @@ input {
     padding: .5rem;
 }
 
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;        
+}
+
 .center {
     text-align: center;
 }
@@ -67,67 +73,7 @@ input {
     margin: 0 auto;    
 }
 
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;        
-}
-
-#counter {
-    padding: .5rem;
-}
-
-#timeLeft {
-    padding: .5rem;
-    border: 1px solid #585958;
-    border-radius: 5px;    
-}
-
-#quiz-container {
-    width: 650px; 
-    display: flex;
-    flex-direction: column;     
-    padding: 2rem;
-}
-
-#quiz-container li {    
-    margin-bottom: .5rem;    
-    padding: .5rem;    
-    border-radius: 5px;
-}
-
-.question {
-    background-color: var(--clickable-element);    
-    color: var(--font-dark);   
-    transition: var(--transition-time); 
-}
-
-.question:hover {
-    background-color: var(--clickable-element-hover);
-    transform: translate(5px,0);
-    transition: var(--transition-time); 
-}
-
-#quiz-container li:hover {    
-    cursor: pointer;
-}
-
-.list-container {
-    display: flex;   
-}
-.feedback-container {
-    border-top: 1px solid var(--font-color);
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-}
-
-.feedback {
-    padding: .5rem;
-    font-style: italic;
-    font-size: 1.5rem;    
-}
-
+/* Basic styling for every button */
 .button {
     transition: 0.2s;
     padding: .5rem;       
@@ -152,19 +98,7 @@ ul {
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
-.correct {
-    background-color: var(--correct-color);
-}
-
-.incorrect {
-    background-color: var(--incorrect-color);
-}
-
-.disabled {    
-    pointer-events: none;   
-    color: var(--font-dark);
-}
-
+/* Styling for button on welcome screen */
 .button.start {    
     background-color: var(--correct-color);
     margin-top: 1rem;
@@ -176,21 +110,102 @@ ul {
     
 }
 
+/* Styling for disabled button */
 .button.disabled {
     background-color: var(--body-bg-color);
 }
 
+/* Adding extra space when necessary */
 .button.scores {
     margin-right: 1rem;
     margin-top: 1rem;
 
 }
 
-.result-item {
+/* Header elements */
+#counter {
+    padding: .5rem;
+}
+
+#timeLeft {
+    padding: .5rem;
+    border: 1px solid #585958;
+    border-radius: 5px;    
+}
+
+/* Quiz container styling */
+#quiz-container {
+    width: 650px; 
+    display: flex;
+    flex-direction: column;     
+    padding: 2rem;
+}
+
+#quiz-container li {    
+    margin-bottom: .5rem;    
+    padding: .5rem;    
+    border-radius: 5px;
+}
+
+#quiz-container li:hover {    
+    cursor: pointer;
+}
+
+.list-container {
+    display: flex;   
+}
+
+/* Styling for each possible answer */
+.question {
+    background-color: var(--clickable-element);    
+    color: var(--font-dark);   
+    transition: var(--transition-time); 
+}
+
+.question:hover {
+    background-color: var(--clickable-element-hover);
+    transform: translate(5px,0);
+    transition: var(--transition-time); 
+}
+
+/* Feedback after user chooses answer */
+.feedback-container {
+    border-top: 1px solid var(--font-color);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.feedback {
+    padding: .5rem;
+    font-style: italic;
+    font-size: 1.5rem;    
+}
+
+/* Styling for correct answer */
+.correct {
+    background-color: var(--correct-color);
+}
+
+/* Styling for incorrect answer */
+.incorrect {
+    background-color: var(--incorrect-color);
+}
+
+/* Disabling events for disabled elements */
+.disabled {    
+    pointer-events: none;   
+    color: var(--font-dark);
+}
+
+/* Styling for each object stored in best scores */
+.best-score-item {
     padding: .5rem;
     font-size: 1.2rem;
 }
 
+
+/* Media queries */
 @media screen and (max-width: 500px) {  
     html {
         font-size: 80%;
