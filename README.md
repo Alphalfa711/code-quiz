@@ -2,11 +2,11 @@
 
 ## Gitgub repo link
 
-[Project Github repository](https://github.com/Alphalfa711/code-quiz)
+[Project Github repository](https://github.com/mnyzio/code-quiz)
 
 ## Link to deployed website
 
-[Code Quiz Website](https://alphalfa711.github.io/code-quiz/)
+[Code Quiz Website](https://mnyzio.github.io/code-quiz/)
 
 ## Description
 
